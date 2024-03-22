@@ -1,35 +1,16 @@
 import java.util.TreeMap;
 
-/**
- * 字典树.
- * <p>包括添加, 删除等操作.</p>
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.TreeMap
- */
 public class Trie {
-    /**
-     * 内部节点类.
-     */
+
     private class Node {
         public boolean isWord;
         public TreeMap<Character, Node> next;
 
-        /**
-         * 包括isWork的构造方法.
-         *
-         * @param isWord 是否是单词
-         */
         public Node(boolean isWord) {
             this.isWord = isWord;
             this.next = new TreeMap<>();
         }
 
-        /**
-         * 无参数构造方法, isWord为false.
-         */
         public Node() {
             this.isWord = false;
             this.next = new TreeMap<>();
@@ -38,28 +19,15 @@ public class Trie {
     private Node root;
     private int size;
 
-    /**
-     * 无参构造方法.
-     */
     public Trie() {
         root = new Node();
         size = 0;
     }
 
-    /**
-     * 获得存储的单词数量.
-     *
-     * @return 单词数量
-     */
     public int getSize() {
         return size;
     }
 
-    /**
-     * 判断字典树是否为空.
-     *
-     * @return 空为true, 否则false
-     */
     public boolean isEmpty() {
         return size == 0;
     }
@@ -125,7 +93,7 @@ public class Trie {
      * 查询单词.
      *
      * @param word 待查找单词
-     * @return 存在为true, 否则false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean contains(String word) {
         Node cur = root;
@@ -143,7 +111,7 @@ public class Trie {
      * 查询单词, 递归.
      *
      * @param word 待查找单词
-     * @return 存在为true, 否则false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean containsR(String word) {
         return containsR(root, 0, word);
@@ -155,6 +123,7 @@ public class Trie {
      * @param node 以node为头的字典树
      * @param index 索引
      * @param word 待查找单词
+     * @return 若存在返回true, 否则返回false
      */
     private boolean containsR(Node node, int index, String word) {
         if (index == word.length()) {
@@ -171,7 +140,7 @@ public class Trie {
      * 查询str是否为前缀.
      *
      * @param str 前缀
-     * @return 存在为true, 否则false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean isPrefix(String str) {
         Node cur = root;
@@ -189,7 +158,7 @@ public class Trie {
      * 查询str是否为前缀, 递归.
      *
      * @param str 前缀
-     * @return 存在为true, 否则false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean isPrefixR(String str) {
         return isPrefixR(root, 0, str);
@@ -201,6 +170,7 @@ public class Trie {
      * @param node 以node为头的字典树
      * @param index 索引
      * @param str 前缀
+     * @return 若存在返回true, 否则返回false
      */
     private boolean isPrefixR(Node node, int index, String str) {
         if (index == str.length()) {
@@ -228,6 +198,7 @@ public class Trie {
      * @param node 以node为头的字典树
      * @param index 索引
      * @param word 待删除单词
+     * @return 返回删除单词之后的字典树
      */
     private Node removeR(Node node, String word, int index) {
         if (index == word.length()) {

@@ -1,16 +1,5 @@
-/**
- * 二分查找算法.
- * <p>数组需要满足有序.</p>
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class BinarySearch {
 
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
     private BinarySearch() {}
 
     /**
@@ -18,8 +7,7 @@ public class BinarySearch {
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return 目标元素索引, 不存在则为-1
-     * @param <E> 支持泛型
+     * @return 返回目标元素索引, 若不存在则返回-1
      */
     public static <E extends Comparable<E>> int searchR(E[] data, E target) {
         return searchR(data, 0, data.length - 1, target);
@@ -32,8 +20,7 @@ public class BinarySearch {
      * @param l 左边界
      * @param r 右边界
      * @param target 待查找元素
-     * @return 目标元素索引, 不存在则为-1
-     * @param <E> 支持泛型
+     * @return 返回目标元素索引, 若不存在则返回-1
      */
     private static <E extends Comparable<E>> int searchR(E[] data, int l, int r, E target) {
         if (l > r) return -1;
@@ -52,8 +39,7 @@ public class BinarySearch {
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return 目标元素索引, 不存在则为-1
-     * @param <E> 支持泛型
+     * @return 返回目标元素索引, 若不存在则返回-1
      */
     public static <E extends Comparable<E>> int search(E[] data, E target) {
         int l = 0, r = data.length - 1;
@@ -75,8 +61,7 @@ public class BinarySearch {
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return 目标元素索引, 不存在则为-1
-     * @param <E> 支持泛型
+     * @return 返回目标元素索引, 若不存在则返回-1
      */
     public static <E extends Comparable<E>> int search2(E[] data, E target) {
         int l = 0, r = data.length;
@@ -95,12 +80,11 @@ public class BinarySearch {
     }
 
     /**
-     * 查找大于目标元素的最小值的索引.
+     * 查找大于目标元素的最小索引.
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return >target的最小索引, 未找到则返回data.length
-     * @param <E> 支持泛型
+     * @return 返回大于target的最小索引, 若未找到则返回data.length
      */
     public static <E extends Comparable<E>> int upper(E[] data, E target) {
         int l = 0, r = data.length;
@@ -117,12 +101,11 @@ public class BinarySearch {
     }
 
     /**
-     * 大于target的最小索引, 存在target返回最大索引.
+     * 查找大于target的最小索引, 存在target返回最大索引.
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return >target, 返回最小索引, ==target, 返回最大索引.
-     * @param <E> 支持泛型
+     * @return 若大于target, 返回最小索引, 若等于target, 返回最大索引
      */
     public static <E extends Comparable<E>> int upperCeil(E[] data, E target) {
         int u  = upper(data, target);
@@ -133,12 +116,11 @@ public class BinarySearch {
     }
 
     /**
-     * >target, 返回最小索引, ==target, 返回最小索引.
+     * 查找大于等于目标元素的最小索引.
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return >=target的最小索引
-     * @param <E> 支持泛型
+     * @return 返回大于等于target的最小索引
      */
     public static <E extends Comparable<E>> int lowerCeil(E[] data, E target) {
         int u = upper(data, target);
@@ -153,12 +135,11 @@ public class BinarySearch {
     }
 
     /**
-     * >target, 返回最小索引, ==target, 返回最小索引.
+     * 查找大于等于目标元素的最小索引.
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return >=target的最小索引
-     * @param <E> 支持泛型
+     * @return 返回大于等于target的最小索引
      */
     public static <E extends Comparable<E>> int lowerCeil2(E[] data, E target) {
         int l = 0, r = data.length;
@@ -178,8 +159,7 @@ public class BinarySearch {
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return <target的最大索引, 未找到则返回-1
-     * @param <E> 支持泛型
+     * @return 返回小于target的最大索引, 未找到则返回-1
      */
     public static <E extends Comparable<E>> int lower(E[] data, E target) {
         int l = -1 ,r = data.length - 1;
@@ -196,12 +176,11 @@ public class BinarySearch {
     }
 
     /**
-     * 小于target的最大索引, 存在target返回最小索引.
+     * 查找小于target的最大索引, 存在target返回最小索引.
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return <target, 返回最大索引, ==target, 返回最小索引
-     * @param <E> 支持泛型
+     * @return 若小于target, 返回最大索引, 若等于target, 返回最小索引
      */
     public static <E extends Comparable<E>> int lowerFloor(E[] data, E target) {
         int l = lower(data, target);
@@ -212,12 +191,11 @@ public class BinarySearch {
     }
 
     /**
-     * <target, 返回最大索引, ==target, 返回最大索引.
+     * 查找小于等于target的最大索引.
      *
      * @param data 目标数组
      * @param target 待查找元素
-     * @return <=target的最大索引
-     * @param <E> 支持泛型
+     * @return 返回小于等于target的最大索引
      */
     public static <E extends Comparable<E>> int upperFloor(E[] data, E target) {
         int l = lower(data, target);

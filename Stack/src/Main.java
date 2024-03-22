@@ -21,7 +21,7 @@ public class Main {
      *
      * @param stack 栈实现类
      * @param opCount 操作的数量
-     * @return 操作耗时
+     * @return 返回操作耗时
      */
     private static double test(Stack<Integer> stack, int opCount) {
         Random random = new Random();

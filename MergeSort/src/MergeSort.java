@@ -1,24 +1,14 @@
 import java.util.Arrays;
 
-/**
- * 归并排序算法, 非原地排序, 稳定.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.Arrays
- */
 public class MergeSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 非原地排序, 稳定
     private MergeSort() {}
 
     /**
      * 排序过程, 第一版.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort(E[] arr) {
         sort(arr, 0, arr.length - 1);
@@ -30,7 +20,6 @@ public class MergeSort {
      * @param arr 待排序数组
      * @param l 左边界
      * @param r 右边界
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
         // 基本问题
@@ -48,7 +37,6 @@ public class MergeSort {
      * 数据有序下的优化.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort2(E[] arr) {
         sort2(arr, 0, arr.length - 1);
@@ -60,7 +48,6 @@ public class MergeSort {
      * @param arr 待排序数组
      * @param l 左边界
      * @param r 右边界
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort2(E[] arr, int l, int r) {
         if (l >= r) {
@@ -79,7 +66,6 @@ public class MergeSort {
      * 使用插入排序优化.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort3(E[] arr) {
         sort3(arr, 0, arr.length - 1);
@@ -110,7 +96,6 @@ public class MergeSort {
      * 优化临时数组.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort4(E[] arr) {
         E[] temp = Arrays.copyOf(arr, arr.length);
@@ -124,7 +109,6 @@ public class MergeSort {
      * @param l 左边界
      * @param r 右边界
      * @param temp 临时数组
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort4(E[] arr, int l, int r, E[] temp) {
         if (l >= r) {
@@ -142,7 +126,6 @@ public class MergeSort {
      * 自底向上的归并.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sortBU(E[] arr) {
         E[] temp = Arrays.copyOf(arr, arr.length);
@@ -162,7 +145,6 @@ public class MergeSort {
      * 使用插入排序优化自底向上的归并.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sortBU2(E[] arr) {
         E[] temp = Arrays.copyOf(arr, arr.length);
@@ -189,7 +171,6 @@ public class MergeSort {
      * @param l 左边界
      * @param mid 第一个区间的右边界
      * @param r 右边界
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void merge(E[] arr, int l, int mid, int r) {
         // 临时数组
@@ -224,7 +205,6 @@ public class MergeSort {
      * @param mid 第一个区间的右边界
      * @param r 右边界
      * @param temp 临时数组
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void merge2(E[] arr, int l, int mid, int r, E[] temp) {
         // 为temp的[l, r]区间赋值

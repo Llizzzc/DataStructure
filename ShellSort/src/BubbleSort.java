@@ -1,21 +1,12 @@
-/**
- * 冒泡排序算法, 原地排序.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class BubbleSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 稳定排序
     private BubbleSort() {}
 
     /**
      * 冒泡排序, 第一版.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort(E[] data) {
         // 进行n - 1轮循环
@@ -33,7 +24,6 @@ public class BubbleSort {
      * 优化, 如果某一轮没有元素交换, 则此时数组已经有序.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort2(E[] data) {
         // 进行n - 1轮循环
@@ -54,7 +44,6 @@ public class BubbleSort {
      * 再优化, 记录最后一次发生交换的索引lastSwappedIndex, 则[lastSwappedIndex, n)已经有序.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort3(E[] data) {
         for (int i = 0; i + 1 < data.length; ) {
@@ -74,7 +63,6 @@ public class BubbleSort {
      * 从后向前冒泡.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort4(E[] data) {
         for (int i = 0; i + 1 < data.length; ) {
@@ -96,7 +84,6 @@ public class BubbleSort {
      * @param data 目标数组
      * @param i 位置i
      * @param j 位置j
-     * @param <E> 支持泛型
      */
     private static <E> void swap(E[] data, int i, int j) {
         E t = data[i];

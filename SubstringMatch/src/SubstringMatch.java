@@ -1,14 +1,5 @@
-/**
- * 字符串匹配.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class SubstringMatch {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
     private SubstringMatch() {}
 
     /**
@@ -16,7 +7,7 @@ public class SubstringMatch {
      *
      * @param s 给定主串
      * @param t 目标子串
-     * @return 如果找到则返回目标子串在主串的索引, 否则返回-1
+     * @return 若找到则返回目标子串在主串的索引, 否则返回-1
      */
     public static int bruteforce(String s, String t) {
         if (s.length() < t.length()) {
@@ -42,7 +33,7 @@ public class SubstringMatch {
      *
      * @param s 给定主串
      * @param t 目标子串
-     * @return 如果找到则返回目标子串在主串的索引, 否则返回-1
+     * @return 若找到则返回目标子串在主串的索引, 否则返回-1
      */
     public static int rabinKarp(String s, String t) {
         if (s.length() < t.length()) {
@@ -77,7 +68,7 @@ public class SubstringMatch {
      *
      * @param s 给定主串
      * @param t 目标子串
-     * @return 如果找到则返回目标目标子串在主串的索引, 否则返回-1
+     * @return 若找到则返回目标目标子串在主串的索引, 否则返回-1
      */
     public static int kmp(String s, String t) {
         if (s.length() < t.length()) {
@@ -108,7 +99,7 @@ public class SubstringMatch {
      * @param left 要比较的s主串的起始位置
      * @param len 目标子串长度
      * @param t 目标子串
-     * @return 相等返回true, 否则false
+     * @return 若相等返回true, 否则返回false
      */
     private static boolean equal(String s, int left, int len, String t) {
         for (int i = 0; i < len; i ++) {
@@ -123,7 +114,7 @@ public class SubstringMatch {
      * 获取字符串t的各个子串的最长的既是前缀也是后缀的字符串.
      *
      * @param t 目标子串
-     * @return border数组
+     * @return 返回border数组
      */
     private static int[] getLSP(String t) {
         int[] lsp = new int[t.length()];

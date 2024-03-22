@@ -2,33 +2,12 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * 二分搜索树.
- * <p>包括添加, 遍历, 删除等操作, 不包含重复元素.</p>
- *
- * @param <E> 支持范型
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.Deque
- * @see java.util.LinkedList
- * @see java.util.Queue
- */
 public class BST<E extends Comparable<E>> {
 
-    /**
-     * 内部节点类.
-     */
     private class Node {
         E e;
         Node left, right;
 
-        /**
-         * 包含e的构造方法.
-         *
-         * @param e 节点元素
-         */
         public Node(E e) {
             this.e = e;
             left = null;
@@ -38,28 +17,15 @@ public class BST<E extends Comparable<E>> {
     Node root;
     int size;
 
-    /**
-     * 无参数构造方法.
-     */
     public BST() {
         root = null;
         size = 0;
     }
 
-    /**
-     * 获取树大小.
-     *
-     * @return 树大小
-     */
     public int getSize() {
         return size;
     }
 
-    /**
-     * 判断树是否为空.
-     *
-     * @return 空为true, 否则fasle
-     */
     public boolean isEmpty() {
         return size == 0;
     }
@@ -78,7 +44,7 @@ public class BST<E extends Comparable<E>> {
      *
      * @param node 以node为根的树
      * @param e 待插入元素
-     * @return 完成插入之后, 新的node为根组成的树.
+     * @return 返回完成插入之后, 新的node为根组成的树.
      */
     private Node addR(Node node, E e) {
         // 如果node是空树, 直接创建节点
@@ -138,7 +104,7 @@ public class BST<E extends Comparable<E>> {
      * 查看是否包含元素e, 递归写法.
      *
      * @param e 待查找元素
-     * @return 存在为true, 否则为false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean containsR(E e) {
         return containsR(root, e);
@@ -149,7 +115,7 @@ public class BST<E extends Comparable<E>> {
      *
      * @param node 以node为根的树
      * @param e 待查找元素
-     * @return 存在为true, 否则为false
+     * @return 若存在返回true, 否则返回false
      */
     private boolean containsR(Node node, E e) {
         if (node == null) {
@@ -167,8 +133,8 @@ public class BST<E extends Comparable<E>> {
     /**
      * 查看非递归写法.
      *
-     * @param e
-     * @return 存在为true, 否则为false
+     * @param e 待查找元素
+     * @return 若存在返回true, 否则返回false
      */
     public boolean contains(E e) {
         if (root == null) {
@@ -358,8 +324,8 @@ public class BST<E extends Comparable<E>> {
     /**
      * 查找最小值, 递归写法.
      *
-     * @return 最小值
-     * @throws RuntimeException 树中没元素时, 查找失败
+     * @return 返回最小值
+     * @throws RuntimeException 数中无元素
      */
     public E minimumR() {
         if (getSize() == 0) {
@@ -372,7 +338,7 @@ public class BST<E extends Comparable<E>> {
      * 递归函数, 在以node为根的树中尝试查找最小值.
      *
      * @param node 以node为根的树
-     * @return 最小值节点
+     * @return 返回最小值节点
      */
     private Node minimumR(Node node) {
         if (node.left == null) {
@@ -384,8 +350,8 @@ public class BST<E extends Comparable<E>> {
     /**
      * 查找最小值, 非递归写法.
      *
-     * @return 最小值
-     * @throws RuntimeException 树中没元素时, 查找失败
+     * @return 返回最小值
+     * @throws RuntimeException 数中无元素
      */
     public E minimum() {
         if (getSize() == 0) {
@@ -401,8 +367,8 @@ public class BST<E extends Comparable<E>> {
     /**
      * 查找最大值, 递归写法.
      *
-     * @return 最大值
-     * @throws RuntimeException 树中没元素时, 查找失败
+     * @return 返回最大值
+     * @throws RuntimeException 数中无元素
      */
     public E maximumR() {
         if (getSize() == 0) {
@@ -415,7 +381,7 @@ public class BST<E extends Comparable<E>> {
      * 递归函数, 在以node为根的树中尝试查找最大值.
      *
      * @param node 以node为根的树
-     * @return 最大值节点
+     * @return 返回最大值节点
      */
     private Node maximumR(Node node) {
         if (node.right == null) {
@@ -428,7 +394,7 @@ public class BST<E extends Comparable<E>> {
      * 查找最大值, 非递归写法.
      *
      * @return 最大值
-     * @throws RuntimeException 树中没元素时, 查找失败
+     * @throws RuntimeException 数中无元素
      */
     public E maximum() {
         if (getSize() == 0) {
@@ -444,7 +410,7 @@ public class BST<E extends Comparable<E>> {
     /**
      * 删除最小值结点, 递归写法.
      *
-     * @return 最小值
+     * @return 返回最小值
      */
     public E removeMinR() {
         E ret = minimumR();
@@ -456,7 +422,7 @@ public class BST<E extends Comparable<E>> {
      * 递归函数, 在以node为根的树中尝试删除最小值.
      *
      * @param node 以node为根的树
-     * @return 删除最小值之后返回的新树
+     * @return 返回删除最小值之后返回的新树
      */
     private Node removeMinR(Node node) {
         // 如果没有左子树了, 则当前节点为要删除的节点
@@ -473,7 +439,7 @@ public class BST<E extends Comparable<E>> {
     /**
      * 删除最小值结点, 非递归写法.
      *
-     * @return 最小值
+     * @return 返回最小值
      */
     public E removeMin() {
         E ret = minimum();
@@ -499,7 +465,7 @@ public class BST<E extends Comparable<E>> {
     /**
      * 删除最大值结点, 递归写法.
      *
-     * @return 最大值
+     * @return 返回最大值
      */
     public E removeMaxR() {
         E ret = maximumR();
@@ -511,7 +477,7 @@ public class BST<E extends Comparable<E>> {
      * 递归函数, 在以node为根的树中尝试删除最大值.
      *
      * @param node 以node为根的树
-     * @return 删除最大值之后返回的新树
+     * @return 返回删除最大值之后返回的新树
      */
     private Node removeMaxR(Node node) {
         // 当前节点没有右子树了
@@ -528,7 +494,7 @@ public class BST<E extends Comparable<E>> {
     /**
      * 删除最大值结点, 非递归写法.
      *
-     * @return 最大值
+     * @return 返回最大值
      */
     public E removeMax() {
         E ret = maximum();
@@ -555,7 +521,7 @@ public class BST<E extends Comparable<E>> {
      * 删除任意一个元素.
      *
      * @param e 待删除元素
-     * @throws RuntimeException 树为空时, 删除失败
+     * @throws RuntimeException 数中无元素
      */
     public void remove(E e) {
         if (getSize() == 0) {
@@ -569,7 +535,7 @@ public class BST<E extends Comparable<E>> {
      *
      * @param node 以node为根的树
      * @param e 待删除元素
-     * @return 删除e元素, 返回的新树
+     * @return 返回删除元素e之后的新树
      */
     private Node remove(Node node, E e) {
         if (node == null) {
@@ -610,8 +576,8 @@ public class BST<E extends Comparable<E>> {
      * 获取指定元素的前驱节点值, 该元素不一定是树中存在的元素, 递归.
      *
      * @param e 待查找元素
-     * @return e的前驱节点的值
-     * @throws RuntimeException 树为空时, 获取前驱失败
+     * @return 返回e的前驱节点的值
+     * @throws RuntimeException 数中无元素
      */
     public E floor(E e) {
         if (getSize() == 0) {
@@ -629,7 +595,7 @@ public class BST<E extends Comparable<E>> {
      *
      * @param node 以node为根的节点
      * @param e 待查找元素
-     * @return e的前驱节点
+     * @return 返回e的前驱节点
      */
     private Node floor(Node node, E e) {
         if (node == null) {
@@ -653,8 +619,8 @@ public class BST<E extends Comparable<E>> {
      * 获取指定元素的后继节点值, 该元素不一定是树中存在的元素, 递归.
      *
      * @param e 待查找元素
-     * @return e的后继节点的值
-     * @throws RuntimeException 树为空时, 获取后继失败
+     * @return 返回e的后继节点的值
+     * @throws RuntimeException 数中无元素
      */
     public E ceil(E e) {
         if (getSize() == 0) {
@@ -672,7 +638,7 @@ public class BST<E extends Comparable<E>> {
      *
      * @param node 以node为根的节点
      * @param e 待查找元素
-     * @return e的后继节点
+     * @return 返回e的后继节点
      */
     private Node ceil(Node node, E e) {
         if (node == null) {
@@ -692,11 +658,6 @@ public class BST<E extends Comparable<E>> {
         return node;
     }
 
-    /**
-     * 覆写Object类的toString方法.
-     *
-     * @return 包含树信息的字符串
-     */
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -707,7 +668,7 @@ public class BST<E extends Comparable<E>> {
     /**
      * 生成以node为根节点, 深度为depth的描述字符串.
      *
-     * @param node 以node为头的树
+     * @param node 以node为根的树
      * @param depth 深度
      * @param res 字符串构造器
      */
@@ -725,7 +686,7 @@ public class BST<E extends Comparable<E>> {
      * 构造深度字符串.
      *
      * @param depth 深度
-     * @return 描述深度的字符串
+     * @return 返回描述深度的字符串
      */
     private String generateDepthString(int depth) {
         StringBuilder res = new StringBuilder();

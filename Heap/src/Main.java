@@ -4,7 +4,7 @@ public class Main {
      *
      * @param arr 待排序数组
      * @param isHeap 是否在堆中直接整理了数组
-     * @return 操作耗时
+     * @return 返回操作耗时
      * @throws IllegalArgumentException 排序失败
      */
     private static double testHeap(Integer[] arr, boolean isHeap) {

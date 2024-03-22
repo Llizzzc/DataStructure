@@ -1,21 +1,11 @@
-/**
- * 堆排序算法, 原地排序.
- *
- * @author lzc
- * @version 2.0
- * @version jdk17
- */
 public class HeapSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
     private HeapSort() {}
 
     /**
      * 堆排序, 原地排序.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort2(E[] data) {
 
@@ -39,7 +29,6 @@ public class HeapSort {
      * @param data 排序数组
      * @param k 索引k
      * @param n 右边界, 左边界为0
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void siftDown(E[] data, int k, int n) {
         while (2 * k + 1 < n) {
@@ -63,7 +52,6 @@ public class HeapSort {
      * @param data 目标数组
      * @param i 位置i
      * @param j 位置j
-     * @param <E> 支持泛型
      */
     private static <E> void swap(E[] data, int i, int j) {
         E t = data[i];

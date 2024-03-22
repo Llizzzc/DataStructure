@@ -11,7 +11,7 @@ public class Main {
             SortHelper.sortTest(arr2, "InsertSort2");
             System.out.println();
 
-            // 在数据有序情况下，比较插入和选择排序
+            // 在数据有序情况下, 比较插入和选择排序
             System.out.println("Order Array: ");
             arr = ArrayGenerator.generatorOrderArray(n);
             arr2 = Arrays.copyOf(arr, arr.length);

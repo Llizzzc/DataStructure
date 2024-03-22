@@ -1,29 +1,12 @@
-/**
- * SQRT分解实现.
- * <p>包括查询, 更新等操作.</p>
- *
- * @param <E> 支持泛型
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class SQRTDecomposition<E> {
 
     private E[] data, blocks;
-    private Merge<E> merge; // 合并操作
+    private Merge<E> merge;
 
     private int N;  // 元素个数
     private int B;  // 每组元素个数
     private int Bn; // 组数
 
-    /**
-     * 包括arr, merge的构造方法.
-     *
-     * @param arr 数组
-     * @param merge 合并操作
-     * @throws IllegalArgumentException 传入数组不能为空
-     */
     public SQRTDecomposition(E[] arr, Merge<E> merge) {
         this.merge = merge;
         N = arr.length;
@@ -52,7 +35,7 @@ public class SQRTDecomposition<E> {
      *
      * @param x 左边界
      * @param y 右边界
-     * @return 区间值
+     * @return 返回区间值
      * @throws IllegalArgumentException 索引不合法
      */
     public E queryRange(int x, int y) {

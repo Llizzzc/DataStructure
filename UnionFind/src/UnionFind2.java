@@ -1,19 +1,8 @@
-/**
- * 并查集实现类, 第二版, 优化合并操作.
- * <p>实现基本并查集接口.</p>
- *
- * @author lzc
- * @version 2.0
- * @version jdk17
- */
 public class UnionFind2 implements UF {
+
+    // 优化合并操作
     private int[] parent;
 
-    /**
-     * 包含size的构造方法.
-     *
-     * @param size 容量
-     */
     public UnionFind2(int size) {
         parent = new int[size];
         // 每个元素初始指向自己
@@ -22,11 +11,6 @@ public class UnionFind2 implements UF {
         }
     }
 
-    /**
-     * 查询并查集大小.
-     *
-     * @return 并查集大小
-     */
     @Override
     public int getSize() {
         return parent.length;
@@ -36,7 +20,7 @@ public class UnionFind2 implements UF {
      * 查询元素所属集合.
      *
      * @param p 元素
-     * @return 元素所属集合
+     * @return 返回元素所属集合
      * @throws IllegalArgumentException 非法元素p
      */
     private int find(int p) {
@@ -49,24 +33,11 @@ public class UnionFind2 implements UF {
         return p;
     }
 
-    /**
-     * 判断两个元素是否属于一个集合, O(h).
-     *
-     * @param p 元素p
-     * @param q 元素q
-     * @return 属于一个集合为true, 否则false
-     */
     @Override
     public boolean isConnected(int p, int q) {
         return find(p) == find(q);
     }
 
-    /**
-     * 连接两个元素, O(h).
-     *
-     * @param p 元素p
-     * @param q 元素q
-     */
     @Override
     public void unionElements(int p, int q) {
         int pRoot = find(p);

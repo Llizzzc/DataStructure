@@ -3,8 +3,10 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         // 测试功能
-        Student[] students = {new Student("bob", 11, 92),
-                new Student("alice", 12, 85), new Student("dell", 12, 77)};
+        Student[] students = {
+                new Student("bob", 11, 92),
+                new Student("alice", 12, 85),
+                new Student("dell", 12, 77)};
         SelectSort.sort(students);
         System.out.println(Arrays.toString(students));
 

@@ -1,21 +1,12 @@
-/**
- * 插入排序算法, 原地排序, 稳定.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class InsertSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 稳定排序
     private InsertSort() {}
 
     /**
      * 从前向后进行排序.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort(E[] arr) {
         // 每次循环前, [0, i)已排好序, [i, n)未排序
@@ -35,7 +26,6 @@ public class InsertSort {
      * 小优化, 将交换操作改为元素平移.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort2(E[] arr) {
         for (int i = 0; i < arr.length; i ++) {
@@ -53,7 +43,6 @@ public class InsertSort {
      * 从后向前进行排序.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort3(E[] arr) {
         // 每次循环前(i, n)已排序, [0, i]未排序
@@ -70,10 +59,9 @@ public class InsertSort {
     /**
      * 交换数组中两个元素的位置.
      *
-     * @param arr 目标数组
+     * @param arr 数组
      * @param i 位置i
      * @param j 位置j
-     * @param <E> 支持泛型
      */
     public static <E> void swap(E[] arr, int i, int j) {
         E t = arr[i];

@@ -6,7 +6,7 @@ public class Main {
      *
      * @param set 集合实现类
      * @param filename 文件名
-     * @return 操作耗时
+     * @return 返回操作耗时
      */
     private static double testSet(Set<String> set, String filename){
         double res = 0.0;

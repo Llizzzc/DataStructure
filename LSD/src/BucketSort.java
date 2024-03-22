@@ -2,21 +2,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * 桶排序算法.
- * <p>可以处理数字数组.</p>
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.Collections
- * @see java.util.LinkedList
- * @see java.util.List
- */
 public class BucketSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 可以处理数字数组
     private BucketSort() {}
 
     /**

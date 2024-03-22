@@ -1,21 +1,12 @@
-/**
- * 希尔排序算法, 原地排序.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class ShellSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 不稳定排序
     private ShellSort() {}
 
     /**
      * 希尔排序, 第一版.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort(E[] data) {
         int h = data.length / 2;
@@ -40,7 +31,6 @@ public class ShellSort {
      * 代码简化.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort2(E[] data) {
         int h = data.length / 2;
@@ -61,7 +51,6 @@ public class ShellSort {
      * 调整步长测试.
      *
      * @param data 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort3(E[] data) {
         int h = 1;

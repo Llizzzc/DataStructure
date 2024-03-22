@@ -1,25 +1,11 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-/**
- * 图的深度优先遍历, 非递归.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.ArrayDeque
- * @see java.util.ArrayList
- */
 public class GraphDFSNoR {
     private Graph graph;
     private boolean visited[];  // 记录访问过的节点
     private ArrayList<Integer> preOrder;
 
-    /**
-     * 根据传入的图获得DFS结果.
-     *
-     * @param graph 图
-     */
     public GraphDFSNoR(Graph graph) {
         this.graph = graph;
         visited = new boolean[graph.getV()];
@@ -52,11 +38,6 @@ public class GraphDFSNoR {
         }
     }
 
-    /**
-     * 返回前序结果.
-     *
-     * @return 前序结果
-     */
     public Iterable<Integer> getPreOrder() {
         return preOrder;
     }

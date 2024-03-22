@@ -1,15 +1,6 @@
-/**
- * MSD基数排序算法.
- * <p>可以处理不等长字符串数组.</p>
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class MSDSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 可以处理不等长字符串数组
     private MSDSort() {}
 
     /**

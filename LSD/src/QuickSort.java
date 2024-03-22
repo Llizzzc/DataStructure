@@ -1,31 +1,17 @@
 import java.util.Random;
-/**
- * 快速排序算法, 原地排序.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.Random
- */
+
 public class QuickSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 不稳定排序
     private QuickSort() {}
 
     /**
-     * 为三路快速排序设计，返回两个索引.
+     * 为三路快速排序设计, 返回两个索引.
      */
     private static class Pair {
         public int indexI;
         public int indexJ;
 
-        /**
-         * 包含i, j的构造方法.
-         *
-         * @param i 小于标定点的最小索引
-         * @param j 大于标定点的最小索引
-         */
         public Pair(int i, int j) {
             this.indexI = i;
             this.indexJ = j;
@@ -33,10 +19,9 @@ public class QuickSort {
     }
 
     /**
-     * 第一版, 在数组完全有序时会退化成n方的算法，且递归深度为n.
+     * 第一版, 在数组完全有序时会退化成n方的算法, 且递归深度为n.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort(E[] arr) {
         sort(arr, 0, arr.length - 1);
@@ -48,7 +33,6 @@ public class QuickSort {
      * @param arr 待排序数组
      * @param l 左边界
      * @param r 右边界
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort(E[] arr, int l, int r) {
         if (l >= r) {
@@ -63,7 +47,6 @@ public class QuickSort {
      * 使用插入排序优化.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort2(E[] arr) {
         sort2(arr, 0, arr.length - 1);
@@ -75,7 +58,6 @@ public class QuickSort {
      * @param arr 待排序数组
      * @param l 左边界
      * @param r 右边界
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort2(E[] arr, int l, int r) {
         if (r - l <= 15) {
@@ -91,7 +73,6 @@ public class QuickSort {
      * 针对数组有序情况下性能退化的改进, 添加随机化.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort3(E[] arr) {
         sort3(arr, 0, arr.length - 1);
@@ -103,7 +84,6 @@ public class QuickSort {
      * @param arr 待排序数组
      * @param l 左边界
      * @param r 右边界
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort3(E[] arr, int l, int r) {
         if (l >= r) {
@@ -118,7 +98,6 @@ public class QuickSort {
      * 只使用一个Random对象.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort4(E[] arr) {
         Random t = new Random();
@@ -132,7 +111,6 @@ public class QuickSort {
      * @param l 左边界
      * @param r 右边界
      * @param rdm Random实例
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort4(E[] arr, int l, int r, Random rdm) {
         if (l >= r) {
@@ -147,7 +125,6 @@ public class QuickSort {
      * 双路快速排序, 针对元素相同的数组进行性能优化.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort5(E[] arr) {
         Random t = new Random();
@@ -161,7 +138,6 @@ public class QuickSort {
      * @param l 左边界
      * @param r 右边界
      * @param rdm Random实例
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort5(E[] arr, int l, int r, Random rdm) {
         if (l >= r) {
@@ -176,7 +152,6 @@ public class QuickSort {
      * 三路快速排序, 针对等于标定点的元素过多时进行性能优化.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort6(E[] arr) {
         Random t = new Random();
@@ -190,7 +165,6 @@ public class QuickSort {
      * @param l 左边界
      * @param r 右边界
      * @param rdm Random实例
-     * @param <E> 支持泛型
      */
     private static <E extends Comparable<E>> void sort6(E[] arr, int l, int r, Random rdm) {
         if (l >= r) {
@@ -207,8 +181,7 @@ public class QuickSort {
      * @param arr 待排序数组
      * @param l 左边界
      * @param r 右边界
-     * @return 标定点所在的索引
-     * @param <E> 支持泛型
+     * @return 返回标定点所在的索引
      */
     private static <E extends Comparable<E>> int partition(E[] arr, int l, int r) {
         // arr[l + 1, j] < v, arr[j + 1, i - 1] >= v
@@ -230,8 +203,7 @@ public class QuickSort {
      * @param arr 待排序数组
      * @param l 左边界
      * @param r 右边界
-     * @return 标定点所在的索引
-     * @param <E> 支持泛型
+     * @return 返回标定点所在的索引
      */
     private static <E extends Comparable<E>> int partition2(E[] arr, int l, int r) {
         // 生成[l, r]之间的索引
@@ -256,8 +228,7 @@ public class QuickSort {
      * @param l 左边界
      * @param r 右边界
      * @param rdm 随机索引
-     * @return 标定点所在的索引
-     * @param <E> 支持泛型
+     * @return 返回标定点所在的索引
      */
     private static <E extends Comparable<E>> int partition3(E[] arr, int l, int r, int rdm) {
         int t = l + rdm;
@@ -281,8 +252,7 @@ public class QuickSort {
      * @param l 左边界
      * @param r 右边界
      * @param rdm 随机索引
-     * @return 标定点所在的索引
-     * @param <E> 支持泛型
+     * @return 返回标定点所在的索引
      */
     private static <E extends Comparable<E>> int partition4(E[] arr, int l, int r, int rdm) {
         int t = l + rdm;
@@ -312,8 +282,7 @@ public class QuickSort {
      * @param l 左边界
      * @param r 右边界
      * @param rdm 随机索引
-     * @return 小于标定点的最大索引和大于标定点的最小索引
-     * @param <E> 支持泛型
+     * @return 返回小于标定点的最大索引和大于标定点的最小索引
      */
     private static <E extends Comparable<E>> Pair partition5(E[] arr, int l, int r, int rdm) {
         int t = l + rdm;
@@ -343,7 +312,6 @@ public class QuickSort {
      * @param arr 目标数组
      * @param i 位置i
      * @param j 位置j
-     * @param <E> 支持泛型
      */
     private static <E> void swap(E[] arr, int i, int j) {
         E t = arr[i];

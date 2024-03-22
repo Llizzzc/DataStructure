@@ -1,94 +1,47 @@
-import java.util.Arrays;
-
-/**
- * 动态数组类.
- * <p>支持增, 删, 查, 改等操作.</p>
- *
- * @param <E> 支持泛型
- *
- * @author lzc
- * @version 2.0
- * @version jdk17
- * @see java.util.Arrays
- */
 public class Array<E> {
     private E[] data;
     private int size;
 
-    /**
-     * 包含capacity的构造方法.
-     *
-     * @param capacity 数组容量
-     */
     public Array(int capacity) {
         data = (E[]) new Object[capacity];
         size = 0;
     }
 
-    /**
-     * 无参数构造方法, 调用Array(10).
-     */
     public Array() {
         this(10);
     }
 
-    /**
-     * 获取数组大小.
-     *
-     * @return 数组大小
-     */
     public int getSize() {
         return size;
     }
 
-    /**
-     * 获取数组容量.
-     *
-     * @return 数组容量
-     */
     public int getCapacity() {
         return data.length;
     }
 
-    /**
-     * 判断数组是否为空.
-     *
-     * @return 空true, 否则false
-     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    /**
-     * 在数组最后添加.
-     *
-     * @param e 待插入元素
-     */
     public void addLast(E e) {
         add(e, size);
     }
 
-    /**
-     * 在数组首部添加.
-     *
-     * @param e 待插入元素
-     */
     public void addFirst(E e) {
         add(e, 0);
     }
 
     /**
-     * 在数组指定位置插入.
+     * 在指定数组下标处插入.
      *
      * @param e 待插入元素
-     * @param index 要插入的索引位置
-     * @throws IllegalArgumentException index小于0或index大于size, 说明索引不合法
+     * @param index 数组下标
+     * @throws IllegalArgumentException index范围[0, size]
      */
     public void add(E e, int index) {
         if (index < 0 || index > size) {
-            throw new IllegalArgumentException("Add failed, require index >= 0 && index <= size.");
+            throw new IllegalArgumentException("Add failed, illegal index.");
         }
-        // 当数组大小等于当前数组容量时, 需要扩容
         if (size == getCapacity()) {
             resize(2 * getCapacity());
         }
@@ -101,47 +54,37 @@ public class Array<E> {
     }
 
     /**
-     * 根据索引获取元素.
+     * 根据数组下标获取元素.
      *
-     * @param index 待获取元素的索引
-     * @return index位置的元素
-     * @throws IllegalArgumentException index小于0或index大于等于size, 说明索引不合法
+     * @param index 数组下标
+     * @return 返回index位置的元素
+     * @throws IllegalArgumentException index范围[0, size)
      */
     public E get(int index) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException("Get failed, require index >= 0 && index < size.");
+            throw new IllegalArgumentException("Get failed, illegal index");
         }
         return data[index];
     }
 
-    /**
-     * 获取末尾元素.
-     *
-     * @return 末尾元素
-     */
+    public E getFirst() {
+        return get(0);
+    }
+
     public E getLast() {
         return get(size - 1);
     }
 
     /**
-     * 获取首元素.
-     *
-     * @return 首元素
-     */
-    public E getFirst() {
-        return get(0);
-    }
-
-    /**
-     * 根据索引修改元素.
+     * 根据数组下标修改元素.
      *
      * @param e 新元素
-     * @param index 待修改位置的索引
-     * @throws IllegalArgumentException index小于0或index大于等于size, 说明索引不合法
+     * @param index 数组下标
+     * @throws IllegalArgumentException index范围[0, size)
      */
     public void set(E e, int index) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException("Set failed, require index >= 0 && index < size.");
+            throw new IllegalArgumentException("Set failed, illegal index.");
         }
         data[index] = e;
     }
@@ -150,7 +93,7 @@ public class Array<E> {
      * 查看是否包含指定元素.
      *
      * @param e 待查找元素
-     * @return 数组中存在为true, 否则false
+     * @return 若数组中存在该元素返回true, 否则返回false
      */
     public Boolean contains(E e) {
         for (int i = 0; i < size; i ++) {
@@ -162,10 +105,10 @@ public class Array<E> {
     }
 
     /**
-     * 查找数组中第一个指定元素并返回索引.
+     * 查找给定元素首次在数组中出现的下标.
      *
      * @param e 待查找元素
-     * @return 元素e在数组中的索引, 为找到则为-1
+     * @return 返回元素在数组中的下标, 若未找到返回-1
      */
     public int find(E e) {
         for (int i = 0; i < size; i ++) {
@@ -176,39 +119,30 @@ public class Array<E> {
         return -1;
     }
 
-    /**
-     * 查找数组中所有的指定元素, 返回全部索引.
-     *
-     * @param e 待查找元素
-     * @return 值为e的所有索引组成的数组
-     */
-    public int[] findAll(E e) {
-        int[] indexArr = new int[size];
-        int j = 0;
-        // 将查找到的索引依次放入indexArr中
+    public Array<Integer> findAll(E e) {
+        Array<Integer> indexList = new Array<>();
         for (int i = 0; i < size; i ++) {
             if (data[i].equals(e)) {
-                indexArr[j] = i;
-                j ++;
+                indexList.addLast(i);
             }
         }
-        return j == 0? null: Arrays.copyOf(indexArr, j);
+        return indexList;
     }
 
     /**
-     * 删除指定索引位置的元素.
+     * 根据数组下标删除元素.
      *
-     * @param index 要删除的位置
-     * @return 删除的元素
-     * @throws IllegalArgumentException index小于0或index大于等于size, 说明索引不合法
+     * @param index 数组下标
+     * @return 返回删除的元素
+     * @throws IllegalArgumentException index范围[0, size)
      */
     public E delete(int index) {
         if (index < 0 || index >= size) {
-            throw new IllegalArgumentException("Delete failed, require index >= 0 && index < size.");
+            throw new IllegalArgumentException("Delete failed, illegal index.");
         }
         E ret = data[index];
         // 从index + 1位置开始, 将元素依次向前移动
-        for (int i = index + 1; i < size; i++) {
+        for (int i = index + 1; i < size; i ++) {
             data[i - 1] = data[i];
         }
         size --;
@@ -219,40 +153,28 @@ public class Array<E> {
         return ret;
     }
 
-    /**
-     * 删除第一个位置的元素.
-     *
-     * @return 删除的元素
-     */
     public E deleteFirst() {
         return delete(0);
     }
 
-    /**
-     * 删除最后一个位置的元素.
-     *
-     * @return 删除的元素
-     */
     public E deleteLast() {
         return delete(size - 1);
     }
 
     /**
-     * 查找某个元素然后删除.
+     * 查找并删除首次出现的指定元素.
      *
-     * @param e 待查找并删除的元素
+     * @param e 待删除元素
+     * @throws IllegalArgumentException 元素不存在
      */
     public void findDelete(E e) {
         if (find(e) != -1) {
             delete(find(e));
+            return;
         }
+        throw new IllegalArgumentException("No such element.");
     }
 
-    /**
-     * 查找某个元素, 删除数组中的所有该元素.
-     *
-     * @param e 待查找并删除的元素
-     */
     public void findDeleteAll(E e) {
         while (contains(e)) {
             findDelete(e);
@@ -260,7 +182,7 @@ public class Array<E> {
     }
 
     /**
-     * 数组变更容量.
+     * 调整数组容量.
      *
      * @param newCapacity 新容量
      */
@@ -272,11 +194,6 @@ public class Array<E> {
         data = newData;
     }
 
-    /**
-     * 覆写Object类的toString方法.
-     *
-     * @return 包含数组信息的字符串
-     */
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();

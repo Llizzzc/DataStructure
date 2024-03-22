@@ -1,23 +1,12 @@
-/**
- * 排序算法测试类.
- *
- * @author lzc
- * @version 6.0
- * @version jdk17
- */
 public class SortHelper {
 
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
     private SortHelper() {}
 
     /**
      * 判断数组是否排好序.
      *
      * @param arr 待判断数组
-     * @return 有序为true, 否则为false
-     * @param <E> 支持泛型
+     * @return 若有序返回true, 否则返回false
      */
     public static <E extends Comparable<E>> boolean isSorted(E[] arr) {
         // 相邻元素是否有序
@@ -34,8 +23,7 @@ public class SortHelper {
      *
      * @param arr 待排序数组
      * @param sortName 排序算法名称
-     * @param <E> 支持泛型
-     * @throws RuntimeException 如果数组没排好序, 则测试失败
+     * @throws RuntimeException 数组未排好序
      */
     public static <E extends Comparable<E>> void sortTest(E[] arr, String sortName) {
         long start = System.nanoTime();

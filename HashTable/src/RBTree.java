@@ -1,20 +1,7 @@
-/**
- * 红黑树实现.
- * <p>包括添加, 查询等操作.</p>
- *
- * @param <K> 支持泛型
- * @param <V> 支持泛型
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class RBTree<K extends Comparable<K>, V> {
     private static final boolean RED = true;
     private static final boolean BLACK = false;
-    /**
-     * 内部节点类.
-     */
+
     private class Node {
         K key;
         V value;
@@ -22,12 +9,6 @@ public class RBTree<K extends Comparable<K>, V> {
         Node right;
         boolean color;
 
-        /**
-         * 包含key, value的构造方法.
-         *
-         * @param key 键
-         * @param value 值
-         */
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
@@ -40,28 +21,15 @@ public class RBTree<K extends Comparable<K>, V> {
     Node root;
     int size;
 
-    /**
-     * 无参数构造方法.
-     */
     public RBTree() {
         root = null;
         size = 0;
     }
 
-    /**
-     * 查询树的大小.
-     *
-     * @return 树大小
-     */
     public int getSize() {
         return size;
     }
 
-    /**
-     * 查询树是否为空.
-     *
-     * @return 空为true, 否则为false
-     */
     public boolean isEmpty() {
         return size == 0;
     }
@@ -70,7 +38,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 判读节点是否为红色.
      *
      * @param node 节点
-     * @return 节点颜色
+     * @return 若节点为红色返回true, 否则返回false
      */
     private boolean isRed(Node node) {
         if (node == null) {
@@ -83,7 +51,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 左旋转.
      *
      * @param node 需要旋转的节点
-     * @return 旋转完成之后的新树
+     * @return 返回旋转完成之后的新树
      */
     private Node leftRotate(Node node) {
         Node x = node.right;
@@ -99,7 +67,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 右旋转.
      *
      * @param node 需要旋转的节点
-     * @return 旋转完成之后的新树
+     * @return 返回旋转完成之后的新树
      */
     private Node rightRotate(Node node) {
         Node x = node.left;
@@ -140,7 +108,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * @param node 以node为根的树
      * @param key 键
      * @param value 值
-     * @return 添加完之后返回的新树
+     * @return 返回添加完之后返回的新树
      */
     private Node add(Node node, K key, V value) {
         if (node == null) {
@@ -172,7 +140,7 @@ public class RBTree<K extends Comparable<K>, V> {
      *
      * @param node 以node为根节点的二分搜索树
      * @param key 键
-     * @return key所在的节点
+     * @return 返回key所在的节点
      */
     private Node getNode(Node node, K key) {
         if (node == null) {
@@ -191,7 +159,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 查看是否包含key所指的值.
      *
      * @param key 键
-     * @return 存在为true, 否则false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean contains(K key) {
         return getNode(root, key) != null;
@@ -201,7 +169,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 获取key所指的值.
      *
      * @param key 键
-     * @return key指的值.
+     * @return 返回key指的值
      */
     public V get(K key) {
         Node node = getNode(root, key);
@@ -213,7 +181,7 @@ public class RBTree<K extends Comparable<K>, V> {
      *
      * @param key 键
      * @param value 新值
-     * @throws IllegalArgumentException 不存在key则设置失败
+     * @throws IllegalArgumentException 不存在key
      */
     public void set(K key, V value) {
         Node node = getNode(root, key);
@@ -227,7 +195,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 递归函数, 获取以node为根的树的最小值节点.
      *
      * @param node 以node为根的树
-     * @return 以node为根的树的最小值节点
+     * @return 返回以node为根的树的最小值节点
      */
     private Node minimumR(Node node) {
         if (node.left == null) {
@@ -240,7 +208,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 递归函数, 删除以node为根的树的最小值节点.
      *
      * @param node 以node为根的树
-     * @return 删除完之后返回的新树
+     * @return 返回删除完之后返回的新树
      */
     private Node removeMinR(Node node) {
         if (node.left == null) {
@@ -257,7 +225,7 @@ public class RBTree<K extends Comparable<K>, V> {
      * 移除key指向的值.
      *
      * @param key 键
-     * @return key所指的值
+     * @return 返回key所指的值
      */
     public V remove(K key) {
         Node node = getNode(root, key);
@@ -273,7 +241,7 @@ public class RBTree<K extends Comparable<K>, V> {
      *
      * @param node 以node为根的树
      * @param key 键
-     * @return 删除完之后返回的新树
+     * @return 返回删除完之后返回的新树
      */
     private Node remove(Node node, K key) {
         if (node == null) {

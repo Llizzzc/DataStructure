@@ -1,18 +1,8 @@
 import java.util.Arrays;
 
-/**
- * LSD基数排序算法.
- * <p>只能对等长字符串排序, 从最后一个字符开始进行计数排序.</p>
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.Arrays
- */
 public class LSDSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
+    // 只能对等长字符串排序, 从最后一个字符开始进行计数排序
     private LSDSort() {}
 
     /**

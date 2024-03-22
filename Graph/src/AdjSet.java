@@ -2,19 +2,9 @@ import java.io.File;
 import java.util.TreeSet;
 import  java.util.Scanner;
 
-/**
- * 无向无权图邻接表, 使用TreeSet优化查找.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.io.File
- * @see java.util.TreeSet
- * @see java.util.Scanner
- */
 public class AdjSet implements Graph {
 
-    private TreeSet<Integer>[] adj;    // 邻接表
+    private TreeSet<Integer>[] adj;    // 邻接表, 使用TreeSet优化查找
     private int V;  // 顶点数
     private int E;  // 边数
 
@@ -58,33 +48,16 @@ public class AdjSet implements Graph {
         }
     }
 
-    /**
-     * 获取顶点数.
-     *
-     * @return 顶点数
-     */
     @Override
     public int getV() {
         return V;
     }
 
-    /**
-     * 获取边数.
-     *
-     * @return 边数
-     */
     @Override
     public int getE() {
         return E;
     }
 
-    /**
-     * 判断两个顶点之间是否存在边.
-     *
-     * @param v 顶点
-     * @param w 顶点
-     * @return 有边返回true, 否则false
-     */
     @Override
     public boolean hasEdge(int v, int w) {
         validate(v);
@@ -92,36 +65,18 @@ public class AdjSet implements Graph {
         return adj[v].contains(w);
     }
 
-    /**
-     * 获取与顶点v相邻的顶点.
-     *
-     * @param v 顶点
-     * @return 相邻的顶点
-     */
     @Override
     public Iterable<Integer> adj(int v) {
         validate(v);
         return adj[v];
     }
 
-    /**
-     * 获取顶点v的度数.
-     *
-     * @param v 顶点
-     * @return 顶点v的度数
-     */
     @Override
     public int degree(int v) {
         validate(v);
         return adj[v].size();
     }
 
-    /**
-     * 判断顶点合法性.
-     *
-     * @param v 顶点
-     * @throws IllegalArgumentException 顶点属于[0, V)
-     */
     @Override
     public void validate(int v) {
         if (v < 0 || v >= V) {

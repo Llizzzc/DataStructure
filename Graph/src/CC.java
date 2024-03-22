@@ -1,25 +1,11 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * 图的连通分量.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.ArrayList
- * @see java.util.Arrays
- */
 public class CC {
     private Graph graph;
     private int visited[];  // 记录访问过的节点
     private int ccCount = 0;  // 连通分量的个数
 
-    /**
-     * 包含graph的构造函数.
-     *
-     * @param graph 图
-     */
     public CC(Graph graph) {
         this.graph = graph;
         visited = new int[graph.getV()];
@@ -32,11 +18,6 @@ public class CC {
         }
     }
 
-    /**
-     * 深度优先遍历.
-     *
-     * @param v 顶点
-     */
     private void dfs(int v, int ccid) {
         visited[v] = ccid;
         for (int w : graph.adj(v)) {
@@ -51,7 +32,7 @@ public class CC {
      *
      * @param v 顶点
      * @param w 顶点
-     * @return 相连返回ture, 否则false
+     * @return 若相连返回ture, 否则返回false
      */
     public boolean isConnected(int v, int w) {
         graph.validate(v);
@@ -62,7 +43,7 @@ public class CC {
     /**
      * 获取连通分量.
      *
-     * @return 连通分量
+     * @return 返回连通分量
      */
     public ArrayList<Integer>[] components() {
         ArrayList<Integer>[] res = new ArrayList[ccCount];
@@ -78,7 +59,7 @@ public class CC {
     /**
      * 获取图的连通分量个数.
      *
-     * @return 连通分量个数
+     * @return 返回连通分量个数
      */
     public int getCount() {
         return ccCount;

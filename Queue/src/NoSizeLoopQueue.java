@@ -1,68 +1,31 @@
-/**
- * 循环队列实现, 不使用size变量.
- * <p>实现了基本队列接口.</p>
- *
- * @param <E> 支持泛型
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class NoSizeLoopQueue<E> implements Queue<E> {
 
     private E[] data;
     private int front;
     private int tail;
 
-    /**
-     * 包含capacity的构造方法, 多开一个空间用于判断队满.
-     *
-     * @param capacity
-     */
     public NoSizeLoopQueue(int capacity) {
         data = (E[]) new Object[capacity + 1];
     }
 
-    /**
-     * 无参数构造方法, NoSizeLoopQueue(10).
-     */
     public NoSizeLoopQueue() {
         this(10);
     }
 
-    /**
-     * 获取队列容量.
-     *
-     * @return  队列容量
-     */
     public int getCapacity() {
         return data.length - 1;
     }
 
-    /**
-     * 判断队列是否为空.
-     *
-     * @return 空为true, 否则false
-     */
     @Override
     public boolean isEmpty() {
         return front == tail;
     }
 
-    /**
-     * 获取队列大小.
-     *
-     * @return 队列大小
-     */
     @Override
     public int getSize() {
         return tail > front ? tail - front : data.length - (front - tail);
     }
 
-    /**
-     * 入队操作.
-     *
-     * @param e 入队元素
-     */
     @Override
     public void enqueue(E e) {
         if ((tail + 1) % data.length == front) {
@@ -72,12 +35,6 @@ public class NoSizeLoopQueue<E> implements Queue<E> {
         tail = (tail + 1) % data.length;
     }
 
-    /**
-     * 出队操作.
-     *
-     * @return 出队元素
-     * @throws IllegalArgumentException 队列为空, 则出队失败
-     */
     @Override
     public E dequeue() {
         if (isEmpty()) {
@@ -92,12 +49,6 @@ public class NoSizeLoopQueue<E> implements Queue<E> {
         return ret;
     }
 
-    /**
-     * 获取队首.
-     *
-     * @return 队首元素
-     * @throws IllegalArgumentException 队空时, 取队首失败
-     */
     @Override
     public E getFront() {
         if (isEmpty()) {
@@ -106,11 +57,6 @@ public class NoSizeLoopQueue<E> implements Queue<E> {
         return data[front];
     }
 
-    /**
-     * 数组变更容量.
-     *
-     * @param newCapacity 新容量
-     */
     private void resize(int newCapacity) {
         E[] newData = (E[]) new Object[newCapacity + 1];
         int i;
@@ -122,11 +68,6 @@ public class NoSizeLoopQueue<E> implements Queue<E> {
         tail = i;
     }
 
-    /**
-     * 覆写Object类的toString方法.
-     *
-     * @return 包含队列信息的字符串
-     */
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();

@@ -1,7 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        // 功能测试
-        Student[] students = {new Student("alice", 202111), new Student("bob", 202112),
+        // 查找测试
+        Student[] students = {
+                new Student("alice", 202111),
+                new Student("bob", 202112),
                 new Student("dell", 202113)};
         Student bob1 = new Student("bob", 202112);
         Student bob2 = new Student("bob", 202114);

@@ -1,17 +1,5 @@
-/**
- * 并查集接口.
- * <p>包括查询, 连接等操作.</p>
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public interface UF {
-    /**
-     * 查询并查集大小.
-     *
-     * @return 并查集大小
-     */
+
     int getSize();
 
     /**
@@ -19,7 +7,7 @@ public interface UF {
      *
      * @param p 元素p
      * @param q 元素q
-     * @return 属于一个集合为true, 否则false
+     * @return 若属于一个集合返回true, 否则返回false
      */
     boolean isConnected(int p, int q);
 

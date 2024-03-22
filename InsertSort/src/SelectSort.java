@@ -1,22 +1,12 @@
-/**
- * 选择排序算法, 原地排序.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class SelectSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
-    private SelectSort() {
-    }
+
+    // 不稳定排序
+    private SelectSort() {}
 
     /**
      * 从前向后进行排序.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort(E[] arr) {
         // 每次循环前[0, i)已排序, [i, n)未排序
@@ -36,7 +26,6 @@ public class SelectSort {
      * 从后向前排序.
      *
      * @param arr 待排序数组
-     * @param <E> 支持泛型
      */
     public static <E extends Comparable<E>> void sort2(E[] arr) {
         // 每次循环前(i, n)已排序, [0, i]未排序
@@ -55,10 +44,9 @@ public class SelectSort {
     /**
      * 交换数组中两个元素的位置.
      *
-     * @param arr 目标数组
+     * @param arr 数组
      * @param i 位置i
      * @param j 位置j
-     * @param <E> 支持泛型
      */
     private static <E> void swap(E[] arr, int i, int j) {
         E t = arr[i];

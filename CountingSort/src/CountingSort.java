@@ -1,14 +1,5 @@
-/**
- * 计数排序算法.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class CountingSort {
-    /**
-     * 私有构造方法, 不允许创建实例.
-     */
+
     private CountingSort() {}
 
     /**

@@ -6,27 +6,13 @@ import java.io.File;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 
-/**
- * 文件操作类.
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.io.FileInputStream
- * @see java.util.ArrayList
- * @see java.util.Scanner
- * @see java.util.Locale
- * @see java.io.File
- * @see java.io.BufferedInputStream
- * @see java.io.IOException
- */
 public class FileOperation {
     /**
      * 读取文件名称为filename中的内容, 并将其中包含的所有词语放进words中.
      *
      * @param filename 文件名
      * @param words 数组类实例
-     * @return 文件存在为true, 否则false
+     * @return 若文件存在返回true, 否则返回false
      */
     public static boolean readFile(String filename, ArrayList<String> words){
 
@@ -34,8 +20,6 @@ public class FileOperation {
             System.out.println("filename is null or words is null.");
             return false;
         }
-
-        // 文件读取
         Scanner scanner;
 
         try {
@@ -77,7 +61,7 @@ public class FileOperation {
      *
      * @param s 目标字串
      * @param start 起始位置
-     * @return 从start的位置开始的第一个字母字符的位置
+     * @return 返回从start的位置开始的第一个字母字符的位置
      */
     private static int firstCharacterIndex(String s, int start){
         for( int i = start ; i < s.length() ; i ++ )

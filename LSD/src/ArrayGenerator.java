@@ -1,25 +1,14 @@
 import java.util.Random;
 
-/**
- * 数组生成类.
- *
- * @author lzc
- * @version 3.0
- * @version jdk17
- * @see java.util.Random
- */
 public class ArrayGenerator {
 
-    /**
-     * 私有无参数构造方法, 不允许创建类实例.
-     */
     private ArrayGenerator() {}
 
     /**
      * 生成顺序数组.
      *
      * @param n 数组长度
-     * @return 长度为n的数组
+     * @return 返回长度为n的顺序数组
      */
     public static Integer[] generatorOrderArray(int n) {
         Integer[] arr = new Integer[n];
@@ -34,7 +23,7 @@ public class ArrayGenerator {
      *
      * @param n 数组长度
      * @param bound 限定元素范围[0, bound)
-     * @return 长度为n的数组
+     * @return 返回长度为n的随机数组
      */
     public static Integer[] generatorRandomArray(int n, int bound) {
         Integer[] arr = new Integer[n];
@@ -50,7 +39,7 @@ public class ArrayGenerator {
      *
      * @param n 数组长度
      * @param M 字符串长度
-     * @return 长度为n的数组
+     * @return 返回长度为n的随机等长字符串数组
      */
     public static String[] generatorRandomEqualLengthStringArray(int n, int M) {
         String[] arr = new String[n];
@@ -70,7 +59,7 @@ public class ArrayGenerator {
      *
      * @param n 数组长度
      * @param bound 限定元素范围[0, bound)
-     * @return 长度为n的数组
+     * @return 返回长度为n的随机非等长数组
      */
     public static String[] generatorRandomStringArray(int n, int bound) {
         String[] arr = new String[n];

@@ -29,7 +29,7 @@ public class Main {
      *
      * @param q 队列
      * @param opCount 操作数
-     * @return 操作耗时
+     * @return 返回操作耗时
      */
     private static double test(Queue<Integer> q, int opCount) {
         Random random = new Random();

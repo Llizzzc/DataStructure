@@ -1,22 +1,7 @@
 import java.util.ArrayList;
 
-/**
- * 二分平衡树实现.
- * <p>包括添加, 删除, 查询等操作.</p>
- *
- * @param <K> 支持泛型
- * @param <V> 支持泛型
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.ArrayList
- */
 public class AVLTree<K extends Comparable<K>, V> {
 
-    /**
-     * 内部节点类.
-     */
     private class Node {
         public K key;
         public V value;
@@ -24,12 +9,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         public Node right;
         public int height;
 
-        /**
-         * 包含key, value的构造方法.
-         *
-         * @param key 键
-         * @param value 值
-         */
         public Node(K key, V value) {
             this.key = key;
             this.value = value;
@@ -41,28 +20,15 @@ public class AVLTree<K extends Comparable<K>, V> {
     Node root;
     int size;
 
-    /**
-     * 无参数构造方法.
-     */
     public AVLTree() {
         root = null;
         size = 0;
     }
 
-    /**
-     * 查询树的大小.
-     *
-     * @return 树大小
-     */
     public int getSize() {
         return size;
     }
 
-    /**
-     * 查询树是否为空.
-     *
-     * @return 空为true, 否则为false
-     */
     public boolean isEmpty() {
         return size == 0;
     }
@@ -70,7 +36,7 @@ public class AVLTree<K extends Comparable<K>, V> {
     /**
      * 判断是否当前满足BST.
      *
-     * @return 满足为true, 否则false
+     * @return 若满足返回true, 否则返回false
      */
     public boolean isBST() {
         ArrayList<K> list = new ArrayList<>();
@@ -101,7 +67,7 @@ public class AVLTree<K extends Comparable<K>, V> {
     /**
      * 判断当前是否满足AVL.
      *
-     * @return 满足为true, 否则false
+     * @return 若满足返回true, 否则返回false
      */
     public boolean isBalanced() {
         return isBalanced(root);
@@ -111,7 +77,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 递归函数, 判断node为根的树是否保持平衡.
      *
      * @param node 以node为根的节点
-     * @return 满足为true, 否则false
+     * @return 若满足返回true, 否则返回false
      */
     private boolean isBalanced(Node node) {
         if (node == null) {
@@ -128,7 +94,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 获取节点高度.
      *
      * @param node 以node为根的树
-     * @return node的高度
+     * @return 返回node的高度
      */
     private int getHeight(Node node) {
         if (node == null) {
@@ -141,7 +107,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 获取节点平衡因子.
      *
      * @param node 以node为根的树
-     * @return node的平衡因子
+     * @return 返回node的平衡因子
      */
     private int getBalanceFactor(Node node) {
         if (node == null) {
@@ -154,7 +120,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 右旋转.
      *
      * @param y 失去平衡的节点
-     * @return 维护好平衡之后的新树
+     * @return 返回维护好平衡之后的新树
      */
     private Node rightRotate(Node y) {
         Node x = y.left;
@@ -174,7 +140,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 左旋转.
      *
      * @param y 失去平衡的节点
-     * @return 维护好平衡之后的新树
+     * @return 返回维护好平衡之后的新树
      */
     private Node leftRotate(Node y) {
         Node x = y.right;
@@ -205,7 +171,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * @param node 以node为根的树
      * @param key 键
      * @param value 值
-     * @return 添加完之后返回的新树
+     * @return 返回添加完之后返回的新树
      */
     private Node add(Node node, K key, V value) {
         if (node == null) {
@@ -249,11 +215,11 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     /**
-     * 返回以node为根节点的二分搜索树中, key所在的节点.
+     * 查找以node为根节点的二分搜索树中, key所在的节点.
      *
      * @param node 以node为根节点的二分搜索树
      * @param key 键
-     * @return key所在的节点
+     * @return 返回key所在的节点
      */
     private Node getNode(Node node, K key) {
         if (node == null) {
@@ -272,7 +238,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 查看是否包含key所指的值.
      *
      * @param key 键
-     * @return 存在为true, 否则false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean contains(K key) {
         return getNode(root, key) != null;
@@ -282,7 +248,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 获取key所指的值.
      *
      * @param key 键
-     * @return key指的值.
+     * @return 返回key指的值
      */
     public V get(K key) {
         Node node = getNode(root, key);
@@ -294,7 +260,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      *
      * @param key 键
      * @param value 新值
-     * @throws IllegalArgumentException 不存在key则设置失败
+     * @throws IllegalArgumentException 不存在key
      */
     public void set(K key, V value) {
         Node node = getNode(root, key);
@@ -308,7 +274,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 递归函数, 获取以node为根的树的最小值节点.
      *
      * @param node 以node为根的树
-     * @return 以node为根的树的最小值节点
+     * @return 返回以node为根的树的最小值节点
      */
     private Node minimumR(Node node) {
         if (node.left == null) {
@@ -321,7 +287,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 递归函数, 删除以node为根的树的最小值节点.
      *
      * @param node 以node为根的树
-     * @return 删除完之后返回的新树
+     * @return 返回删除完之后返回的新树
      */
     private Node removeMinR(Node node) {
         if (node.left == null) {
@@ -338,7 +304,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      * 移除key指向的值.
      *
      * @param key 键
-     * @return key所指的值
+     * @return 返回key所指的值
      */
     public V remove(K key) {
         Node node = getNode(root, key);
@@ -354,7 +320,7 @@ public class AVLTree<K extends Comparable<K>, V> {
      *
      * @param node 以node为根的树
      * @param key 键
-     * @return 删除完之后返回的新树
+     * @return 返回删除完之后返回的新树
      */
     private Node remove(Node node, K key) {
         if (node == null) {
@@ -380,7 +346,7 @@ public class AVLTree<K extends Comparable<K>, V> {
                 size --;
                 retNode = rightNode;
             } else {
-                // 找到比待删除节点大的最小节点，用这个节点顶替待删除节点
+                // 找到比待删除节点大的最小节点, 用这个节点顶替待删除节点
                 Node successor = minimumR(node.right);
                 successor.right = remove(node.right, successor.key);
                 successor.left = node.left;

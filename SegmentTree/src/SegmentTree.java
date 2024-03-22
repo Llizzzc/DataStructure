@@ -1,25 +1,9 @@
-/**
- * 线段树.
- * <p>包括查询, 更新等操作.</p>
- *
- * @param <E> 支持泛型
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- */
 public class SegmentTree<E> {
 
     private E[] data;
     private E[] tree;
     private Merge<E> merge;
 
-    /**
-     * 包含arr, merge的构造方法.
-     *
-     * @param arr 数组
-     * @param merge 合并操作
-     */
     public SegmentTree(E[] arr, Merge<E> merge) {
         this.merge = merge;
         data = (E[]) new Object[arr.length];
@@ -58,7 +42,7 @@ public class SegmentTree<E> {
      * 获取左孩子索引.
      *
      * @param index 索引
-     * @return 左孩子索引
+     * @return 返回左孩子索引
      */
     private int leftChild(int index) {
         return 2 * index + 1;
@@ -68,7 +52,7 @@ public class SegmentTree<E> {
      * 获取右孩子索引.
      *
      * @param index 索引
-     * @return 右孩子索引
+     * @return 返回右孩子索引
      */
     private int rightChild(int index) {
         return 2 * index + 2;
@@ -79,7 +63,7 @@ public class SegmentTree<E> {
      *
      * @param queryL 左边界
      * @param queryR 右边界
-     * @return 区间的值
+     * @return 返回区间的值
      * @throws IllegalArgumentException 查询索引不合法
      */
     public E query(int queryL, int queryR) {
@@ -91,14 +75,14 @@ public class SegmentTree<E> {
     }
 
     /**
-     * 在以treeIndex为根的线段树中[l, r]范围，搜索[queryL, queryR]的值.
+     * 在以treeIndex为根的线段树中[l, r]范围, 搜索[queryL, queryR]的值.
      *
      * @param treeIndex 根索引
      * @param l treeIndex的左边界
      * @param r treeIndex的右边界
      * @param queryL 左边界
      * @param queryR 右边界
-     * @return 区间的值
+     * @return 返回区间的值
      */
     private E query(int treeIndex, int l, int r, int queryL, int queryR) {
         // 如果查询的区间就是treeIndex表示的区间
@@ -134,7 +118,6 @@ public class SegmentTree<E> {
         data[index] = e;
         set(0, 0, data.length - 1, index, e);
     }
-    //
 
     /**
      * 在以treeIndex为根的线段树中更新index位置的值为e.
@@ -164,11 +147,6 @@ public class SegmentTree<E> {
         tree[treeIndex] = merge.merge(tree[leftChild], tree[rightChild]);
     }
 
-    /**
-     * 覆写Object类的toString方法.
-     *
-     * @return 包含线段树的字符串
-     */
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();

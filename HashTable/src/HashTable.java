@@ -1,17 +1,5 @@
 import java.util.TreeMap;
 
-/**
- * 哈希表实现.
- * <p>包括添加, 删除等操作.</p>
- *
- * @param <K> 支持泛型
- * @param <V> 支持泛型
- *
- * @author lzc
- * @version 1.0
- * @version jdk17
- * @see java.util.TreeMap
- */
 public class HashTable<K, V> {
     private static final int upperTol = 10; // 每个地址存放的元素上界
     private static final int lowerTol = 2;  // 每个地址存放的元素下界
@@ -21,9 +9,6 @@ public class HashTable<K, V> {
     private int size;
     private int M;
 
-    /**
-     * 无参数构造函数.
-     */
     public HashTable() {
         this.M = capacity[capacityIndex];
         this.size = 0;
@@ -33,30 +18,14 @@ public class HashTable<K, V> {
         }
     }
 
-    /**
-     * 覆写Object的hash方法.
-     *
-     * @param key 键
-     * @return 哈希值
-     */
     private int hash(K key) {
         return (key.hashCode() & 0x7fffffff) % M;
     }
 
-    /**
-     * 查询哈希表是否为空.
-     *
-     * @return 空为true, 否则为false
-     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    /**
-     * 查询哈希表的大小.
-     *
-     * @return 哈希表大小
-     */
     public int getSize() {
         return size;
     }
@@ -85,7 +54,7 @@ public class HashTable<K, V> {
      * 移除key指向的值.
      *
      * @param key 键
-     * @return key所指的值
+     * @return 返回key所指的值
      */
     public V remove(K key) {
         TreeMap<K, V> map = hashTable[hash(key)];
@@ -106,7 +75,7 @@ public class HashTable<K, V> {
      *
      * @param key 键
      * @param value 新值
-     * @throws IllegalArgumentException 不存在key则设置失败
+     * @throws IllegalArgumentException 不存在key
      */
     public void set(K key, V value) {
         TreeMap<K, V> map = hashTable[hash(key)];
@@ -120,7 +89,7 @@ public class HashTable<K, V> {
      * 获取key所指的值.
      *
      * @param key 键
-     * @return key指的值.
+     * @return 返回key指的值
      */
     public V get(K key) {
         return hashTable[hash(key)].get(key);
@@ -130,7 +99,7 @@ public class HashTable<K, V> {
      * 查看是否包含key所指的值.
      *
      * @param key 键
-     * @return 存在为true, 否则false
+     * @return 若存在返回true, 否则返回false
      */
     public boolean contains(K key) {
         return hashTable[hash(key)].containsKey(key);
