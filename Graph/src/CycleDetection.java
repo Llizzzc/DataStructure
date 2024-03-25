@@ -47,7 +47,7 @@ public class CycleDetection {
     public static void main(String[] args){
         CycleDetection cycleDetection = new CycleDetection(new AdjSet("g.txt"));
         System.out.println(cycleDetection.hasCycle());
-        CycleDetection cycleDetection2 = new CycleDetection(new AdjSet("g2.txt"));
-        System.out.println(cycleDetection2.hasCycle());
+        cycleDetection = new CycleDetection(new AdjSet("g2.txt"));
+        System.out.println(cycleDetection.hasCycle());
     }
 }
