@@ -1,3 +1,8 @@
+package dfs;
+
+import graph.AdjSet;
+import graph.Graph;
+
 public class IsTree {
 
     private Graph graph;

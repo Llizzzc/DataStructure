@@ -1,10 +1,12 @@
+package graph;
+
 import java.io.File;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.TreeSet;
+import  java.util.Scanner;
 
-public class AdjList implements Graph {
+public class AdjSet implements Graph {
 
-    private LinkedList<Integer>[] adj;    // 邻接表
+    private TreeSet<Integer>[] adj;    // 邻接表, 使用TreeSet优化查找
     private int V;  // 顶点数
     private int E;  // 边数
 
@@ -14,7 +16,7 @@ public class AdjList implements Graph {
      * @param filename 文件名
      * @throws IllegalArgumentException V && E need to > 0, 两个顶点间不存在多条边, 不存在自环
      */
-    public AdjList(String filename) {
+    public AdjSet(String filename) {
         File f = new File(filename);
         try (Scanner scanner = new Scanner(f)) {
             V = scanner.nextInt();
@@ -25,9 +27,9 @@ public class AdjList implements Graph {
             if (E <= 0) {
                 throw new IllegalArgumentException("E must > 0!");
             }
-            adj = new LinkedList[V];
+            adj = new TreeSet[V];
             for (int i = 0; i < V; i ++) {
-                adj[i] = new LinkedList<>();
+                adj[i] = new TreeSet<>();
             }
             for (int i = 0; i < E; i ++) {
                 int a = scanner.nextInt();
@@ -71,7 +73,6 @@ public class AdjList implements Graph {
         return adj[v];
     }
 
-
     @Override
     public int degree(int v) {
         validate(v);
@@ -92,7 +93,7 @@ public class AdjList implements Graph {
         for (int v = 0; v < V; v ++) {
             sb.append(v).append(" : ");
             for (int w : adj[v]) {
-               sb.append(w).append(" ");
+                sb.append(w).append(" ");
             }
             sb.append("\n");
         }
@@ -100,7 +101,7 @@ public class AdjList implements Graph {
     }
 
     public static void main(String[] args) {
-        AdjList adjList = new AdjList("g.txt");
-        System.out.println(adjList);
+        AdjSet adjSet = new AdjSet("g.txt");
+        System.out.println(adjSet);
     }
 }

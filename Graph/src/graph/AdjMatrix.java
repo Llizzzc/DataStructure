@@ -1,20 +1,22 @@
+package graph;
+
 import java.io.File;
-import java.util.TreeSet;
-import  java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class AdjSet implements Graph {
+public class AdjMatrix implements Graph {
 
-    private TreeSet<Integer>[] adj;    // 邻接表, 使用TreeSet优化查找
+    private int[][] adj;    // 邻接矩阵
     private int V;  // 顶点数
     private int E;  // 边数
 
     /**
-     * 根据file构建邻接表.
+     * 根据file构建邻接矩阵.
      *
      * @param filename 文件名
      * @throws IllegalArgumentException V && E need to > 0, 两个顶点间不存在多条边, 不存在自环
      */
-    public AdjSet(String filename) {
+    public AdjMatrix(String filename) {
         File f = new File(filename);
         try (Scanner scanner = new Scanner(f)) {
             V = scanner.nextInt();
@@ -25,10 +27,7 @@ public class AdjSet implements Graph {
             if (E <= 0) {
                 throw new IllegalArgumentException("E must > 0!");
             }
-            adj = new TreeSet[V];
-            for (int i = 0; i < V; i ++) {
-                adj[i] = new TreeSet<>();
-            }
+            adj = new int[V][V];
             for (int i = 0; i < E; i ++) {
                 int a = scanner.nextInt();
                 validate(a);
@@ -37,11 +36,11 @@ public class AdjSet implements Graph {
                 if (a == b) {
                     throw new IllegalArgumentException("a can not equal b!");
                 }
-                if (adj[a].contains(b)) {
+                if (adj[a][b] == 1) {
                     throw new IllegalArgumentException("The side already exists!");
                 }
-                adj[a].add(b);
-                adj[b].add(a);
+                adj[a][b] = 1;
+                adj[b][a] = 1;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,19 +61,29 @@ public class AdjSet implements Graph {
     public boolean hasEdge(int v, int w) {
         validate(v);
         validate(w);
-        return adj[v].contains(w);
+        return adj[v][w] == 1;
     }
 
     @Override
     public Iterable<Integer> adj(int v) {
         validate(v);
-        return adj[v];
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < V; i ++) {
+            if (adj[v][i] == 1) {
+                res.add(i);
+            }
+        }
+        return res;
     }
 
     @Override
     public int degree(int v) {
         validate(v);
-        return adj[v].size();
+        int degree = 0;
+        for (Integer w : adj(v)) {
+            degree ++;
+        }
+        return degree;
     }
 
     @Override
@@ -88,10 +97,9 @@ public class AdjSet implements Graph {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("顶点数: %d, 边数: %d\n", V, E));
-        for (int v = 0; v < V; v ++) {
-            sb.append(v).append(" : ");
-            for (int w : adj[v]) {
-                sb.append(w).append(" ");
+        for (int i = 0; i < V; i ++) {
+            for (int j = 0; j < V; j ++) {
+                sb.append(adj[i][j]).append(" ");
             }
             sb.append("\n");
         }
@@ -99,7 +107,7 @@ public class AdjSet implements Graph {
     }
 
     public static void main(String[] args) {
-        AdjSet adjSet = new AdjSet("g.txt");
-        System.out.println(adjSet);
+        AdjMatrix adjMatrix = new AdjMatrix("g.txt");
+        System.out.println(adjMatrix);
     }
 }

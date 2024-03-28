@@ -1,13 +1,18 @@
-public class AllPath {
+package bfs;
+
+import graph.AdjSet;
+import graph.Graph;
+
+public class AllPath2 {
 
     private Graph graph;
-    private SingleSourcePathImprovement[] path;
+    private SingleSourcePathImprovement2[] path;
 
-    public AllPath(Graph graph) {
+    public AllPath2(Graph graph) {
         this.graph = graph;
-        path = new SingleSourcePathImprovement[graph.getV()];
+        path = new SingleSourcePathImprovement2[graph.getV()];
         for (int v = 0; v < graph.getV(); v ++) {
-            path[v] = new SingleSourcePathImprovement(graph, v);
+            path[v] = new SingleSourcePathImprovement2(graph, v);
         }
     }
 
@@ -38,9 +43,9 @@ public class AllPath {
     }
 
     public static void main(String[] args) {
-        AllPath allPath = new AllPath(new AdjSet("g.txt"));
-        System.out.println("0 -> 6: " + allPath.path(0, 6));
-        System.out.println("1 -> 4: " + allPath.path(1, 4));
-        System.out.println("3 -> 6: " + allPath.path(3, 6));
+        AllPath2 allPath2 = new AllPath2(new AdjSet("g.txt"));
+        System.out.println("0 -> 6: " + allPath2.path(0, 6));
+        System.out.println("1 -> 4: " + allPath2.path(1, 4));
+        System.out.println("3 -> 6: " + allPath2.path(3, 6));
     }
 }

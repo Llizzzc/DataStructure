@@ -1,25 +1,36 @@
+package bfs;
+
+import graph.AdjSet;
+import graph.Graph;
 import java.util.*;
 
-public class SingleSourcePathImprovement2 {
+public class AllPathImprovement2 {
     private Graph graph;
     private int s;
+    private int t;
     private int[] pre;  // 记录父节点
 
-    public SingleSourcePathImprovement2(Graph graph, int s){
+    public AllPathImprovement2(Graph graph, int s, int t){
         graph.validate(s);
+        graph.validate(t);
         this.graph = graph;
         this.s = s;
+        this.t = t;
         pre = new int[graph.getV()];
         Arrays.fill(pre, -1);
-        bfs(s);  // 顶点s的父节点设为s
+        bfs();  // 顶点s的父节点设为s
     }
 
-    private void bfs(int v){
+    private void bfs(){
         Deque<Integer> queue = new ArrayDeque<>();
-        queue.add(v);
-        pre[v] = v;
+        queue.add(s);
+        pre[s] = s;
+        if (s == t) return;
         while (!queue.isEmpty()) {
             int q = queue.removeFirst();
+            if (q == t) {
+                return;
+            }
             for (int w : graph.adj(q)) {
                 if (pre[w] == -1) {
                     queue.addLast(w);
@@ -32,23 +43,20 @@ public class SingleSourcePathImprovement2 {
     /**
      * 判断从顶点s出发是否能够到达顶点t.
      *
-     * @param t 顶点
      * @return 若可达返回true, 否则返回false
      */
-    public boolean isConnectedTo(int t){
-        graph.validate(t);
+    public boolean isConnectedTo(){
         return pre[t] != -1;
     }
 
     /**
      * 获取从顶点s至顶点t的单源路径.
      *
-     * @param t 顶点
      * @return 返回顶点s至顶点t的单源路径
      */
-    public Iterable<Integer> path(int t){
+    public Iterable<Integer> path(){
         ArrayList<Integer> res = new ArrayList<>();
-        if(!isConnectedTo(t)) {
+        if(!isConnectedTo()) {
             return res;
         }
         int cur = t;
@@ -62,8 +70,11 @@ public class SingleSourcePathImprovement2 {
     }
 
     public static void main(String[] args) {
-        SingleSourcePathImprovement2 singleSourcePathImprovement2 = new SingleSourcePathImprovement2(new AdjSet("g.txt"),  0);
-        System.out.println("0 -> 6: " + singleSourcePathImprovement2.path(6));
-        System.out.println("0 -> 5: " + singleSourcePathImprovement2.path(5));
+        AllPathImprovement2 pathImprovement2 = new AllPathImprovement2(new AdjSet("g.txt"),  0, 6);
+        System.out.println("0 -> 6: " + pathImprovement2.path());
+        pathImprovement2 = new AllPathImprovement2(new AdjSet("g.txt"), 1, 4);
+        System.out.println("1 -> 4: " + pathImprovement2.path());
+        pathImprovement2 = new AllPathImprovement2(new AdjSet("g.txt"), 3, 6);
+        System.out.println("3 -> 6: " + pathImprovement2.path());
     }
 }
