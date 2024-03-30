@@ -93,6 +93,16 @@ public class AdjMatrix implements Graph {
         }
     }
 
+    public void removeEdge(int v, int w){
+        validate(v);
+        validate(w);
+        if(adj[v][w] == 1) {
+            E --;
+        }
+        adj[v][w] = 0;
+        adj[w][v] = 0;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

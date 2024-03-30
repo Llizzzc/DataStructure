@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.TreeSet;
 import  java.util.Scanner;
 
-public class AdjSet implements Graph {
+public class AdjSet implements Graph, Cloneable{
 
     private TreeSet<Integer>[] adj;    // 邻接表, 使用TreeSet优化查找
     private int V;  // 顶点数
@@ -84,6 +84,35 @@ public class AdjSet implements Graph {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException("v must be belong [0, V)!");
         }
+    }
+
+    @Override
+    public void removeEdge(int v, int w){
+        validate(v);
+        validate(w);
+        if(adj[v].contains(w)) {
+            E --;
+        }
+        adj[v].remove(w);
+        adj[w].remove(v);
+    }
+
+    @Override
+    public Object clone(){
+        try{
+            AdjSet cloned = (AdjSet) super.clone();
+            cloned.adj = new TreeSet[V];
+            for(int v = 0; v < V; v ++){
+                cloned.adj[v] = new TreeSet<>();
+                for(int w: adj[v])
+                    cloned.adj[v].add(w);
+            }
+            return cloned;
+        }
+        catch (CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

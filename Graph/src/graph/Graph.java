@@ -1,7 +1,6 @@
 package graph;
 
 public interface Graph {
-
     /**
      * 获取顶点数.
      *
@@ -47,4 +46,12 @@ public interface Graph {
      * @param v 顶点
      */
     void validate(int v);
+
+    /**
+     * 删除边v - w.
+     *
+     * @param v 顶点
+     * @param w 顶点
+     */
+    void removeEdge(int v, int w);
 }

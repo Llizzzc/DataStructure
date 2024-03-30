@@ -87,6 +87,16 @@ public class AdjList implements Graph {
         }
     }
 
+    public void removeEdge(int v, int w){
+        validate(v);
+        validate(w);
+        if(adj[v].contains(w)) {
+            E --;
+        }
+        adj[v].remove(w);
+        adj[w].remove(v);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
