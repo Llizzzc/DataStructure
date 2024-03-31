@@ -22,7 +22,7 @@ public class FindBridges {
 
         @Override
         public String toString() {
-            return v + " - " + w;
+            return "(" + v + " - " + w + ")";
         }
     }
 
