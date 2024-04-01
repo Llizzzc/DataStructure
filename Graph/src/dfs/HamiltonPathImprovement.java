@@ -13,6 +13,7 @@ public class HamiltonPathImprovement {
 
     public HamiltonPathImprovement(Graph graph, int s) {
         this.graph = graph;
+        graph.validate(s);
         this.s = s;
         pre = new int[graph.getV()];
         Arrays.fill(pre, -1);

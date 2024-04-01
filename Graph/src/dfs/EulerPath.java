@@ -12,6 +12,7 @@ public class EulerPath {
 
     public EulerPath(AdjSet graph, int s) {
         this.graph = graph;
+        graph.validate(s);
         this.s = s;
     }
 

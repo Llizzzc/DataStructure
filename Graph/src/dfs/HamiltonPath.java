@@ -14,6 +14,7 @@ public class HamiltonPath {
 
     public HamiltonPath(Graph graph, int s) {
         this.graph = graph;
+        graph.validate(s);
         this.s = s;
         visited = new boolean[graph.getV()];
         pre = new int[graph.getV()];
