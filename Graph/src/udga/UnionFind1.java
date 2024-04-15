@@ -1,4 +1,4 @@
-package mst;
+package udga;
 
 public class UnionFind1 implements UF {
     

@@ -1,12 +1,13 @@
-package mst;
+package udga;
 
 import dfs.CC;
 import graph.Weighted;
-import java.util.ArrayList;
-import java.util.Collections;
+import graph.UndirectedWeightedGraph;
 
-public class Kruskal {
-    private Weighted graph;
+import java.util.ArrayList;
+
+public class Prim {
+    private UndirectedWeightedGraph graph;
     private ArrayList<Edge> mst = new ArrayList<>();
 
     public class Edge implements Comparable<Edge> {
@@ -31,27 +32,29 @@ public class Kruskal {
         }
     }
 
-    public Kruskal(Weighted graph) {
+    public Prim(UndirectedWeightedGraph graph) {
         this.graph = graph;
         CC cc = new CC(graph);
         if (cc.getCount() > 1) {
             return;
         }
-        ArrayList<Edge> edges = new ArrayList<>();
-        for (int v = 0; v < graph.getV(); v ++) {
-            for (int w : graph.adj(v)) {
-                if (v < w) {
-                    edges.add(new Edge(v, w, graph.getWeight(v, w)));
+
+        boolean[] visited = new boolean[graph.getV()];
+        visited[0] = true;
+        for (int i = 1; i < graph.getV(); i ++) {
+            Edge minEdge = new Edge(-1, -1, Integer.MAX_VALUE);
+            for (int v = 0; v < graph.getV(); v ++) {
+                if (visited[v]) {
+                    for (int w : graph.adj(v)) {
+                        if (!visited[w] && graph.getWeight(v, w) < minEdge.weight) {
+                            minEdge = new Edge(v, w, graph.getWeight(v, w));
+                        }
+                    }
                 }
             }
-        }
-        Collections.sort(edges);
-        UF uf = new UnionFind1(graph.getV());
-        for (Edge edge : edges) {
-            if (!uf.isConnected(edge.v, edge.w)) {
-                mst.add(edge);
-                uf.unionElements(edge.v, edge.w);
-            }
+            mst.add(minEdge);
+            visited[minEdge.w] = true;
+            visited[minEdge.v] = true;
         }
     }
 
@@ -60,7 +63,7 @@ public class Kruskal {
     }
 
     public static void main(String[] args) {
-        Kruskal kruskal = new Kruskal(new Weighted("g15.txt"));
-        System.out.println(kruskal.result());
+        Prim prim = new Prim(new Weighted("g15.txt"));
+        System.out.println(prim.result());
     }
 }

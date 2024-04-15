@@ -1,6 +1,7 @@
 package sp;
 
 import graph.Weighted;
+import graph.UndirectedWeightedGraph;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,7 +9,7 @@ import java.util.PriorityQueue;
 
 public class DijkstraImprovement {
 
-    private Weighted graph;
+    private UndirectedWeightedGraph graph;
     private int s;
     private boolean[] visited;
     private int[] dis;
@@ -28,7 +29,7 @@ public class DijkstraImprovement {
         }
     }
 
-    public DijkstraImprovement(Weighted graph, int s) {
+    public DijkstraImprovement(UndirectedWeightedGraph graph, int s) {
         this.graph = graph;
         graph.validate(s);
         this.s = s;
@@ -85,9 +86,9 @@ public class DijkstraImprovement {
     }
 
     public static void main(String[] args) {
-        Weighted weighted = new Weighted("g16.txt");
-        DijkstraImprovement dij = new DijkstraImprovement(weighted, 0);
-        for (int v = 0; v < weighted.getV(); v ++) {
+        UndirectedWeightedGraph g = new Weighted("g16.txt");
+        DijkstraImprovement dij = new DijkstraImprovement(g, 0);
+        for (int v = 0; v < g.getV(); v ++) {
             System.out.print(dij.distTo(v) + " ");
         }
         System.out.println();

@@ -2,38 +2,38 @@ package bfs;
 
 import graph.AdjSet;
 import graph.Graph;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
 
-public class AllPathImprovement2 {
+public class SingleSourcePath {
+
     private Graph graph;
     private int s;
-    private int t;
+    private boolean[] visited;
     private int[] pre;  // 记录父节点
 
-    public AllPathImprovement2(Graph graph, int s, int t){
+    public SingleSourcePath(Graph graph, int s){
         graph.validate(s);
-        graph.validate(t);
         this.graph = graph;
         this.s = s;
-        this.t = t;
+        visited = new boolean[graph.getV()];
         pre = new int[graph.getV()];
-        Arrays.fill(pre, -1);
-        bfs();  // 顶点s的父节点设为s
+        bfs(s);  // 顶点s的父节点设为s
     }
 
-    private void bfs(){
+    private void bfs(int v){
         Deque<Integer> queue = new ArrayDeque<>();
-        queue.add(s);
-        pre[s] = s;
-        if (s == t) return;
+        queue.add(v);
+        visited[v] = true;
+        pre[v] = v;
         while (!queue.isEmpty()) {
             int q = queue.removeFirst();
-            if (q == t) {
-                return;
-            }
             for (int w : graph.adj(q)) {
-                if (pre[w] == -1) {
+                if (!visited[w]) {
                     queue.addLast(w);
+                    visited[w] = true;
                     pre[w] = q;
                 }
             }
@@ -43,20 +43,23 @@ public class AllPathImprovement2 {
     /**
      * 判断从顶点s出发是否能够到达顶点t.
      *
+     * @param t 顶点
      * @return 若可达返回true, 否则返回false
      */
-    public boolean isConnectedTo(){
-        return pre[t] != -1;
+    public boolean isConnectedTo(int t){
+        graph.validate(t);
+        return visited[t];
     }
 
     /**
      * 获取从顶点s至顶点t的单源路径.
      *
+     * @param t 顶点
      * @return 返回顶点s至顶点t的单源路径
      */
-    public Iterable<Integer> path(){
+    public Iterable<Integer> path(int t){
         ArrayList<Integer> res = new ArrayList<>();
-        if(!isConnectedTo()) {
+        if(!isConnectedTo(t)) {
             return res;
         }
         int cur = t;
@@ -70,11 +73,8 @@ public class AllPathImprovement2 {
     }
 
     public static void main(String[] args) {
-        AllPathImprovement2 pathImprovement2 = new AllPathImprovement2(new AdjSet("g.txt"),  0, 6);
-        System.out.println("0 -> 6: " + pathImprovement2.path());
-        pathImprovement2 = new AllPathImprovement2(new AdjSet("g.txt"), 1, 4);
-        System.out.println("1 -> 4: " + pathImprovement2.path());
-        pathImprovement2 = new AllPathImprovement2(new AdjSet("g.txt"), 3, 6);
-        System.out.println("3 -> 6: " + pathImprovement2.path());
+        SingleSourcePath singleSourcePath = new SingleSourcePath(new AdjSet("g.txt"),  0);
+        System.out.println("0 -> 6: " + singleSourcePath.path(6));
+        System.out.println("0 -> 5: " + singleSourcePath.path(5));
     }
 }

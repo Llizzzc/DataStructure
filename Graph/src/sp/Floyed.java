@@ -1,15 +1,16 @@
 package sp;
 
 import graph.Weighted;
+import graph.UndirectedWeightedGraph;
 import java.util.Arrays;
 
 public class Floyed {
 
-    private Weighted graph;
+    private UndirectedWeightedGraph graph;
     private int[][] dis;
     private boolean hasNegCycle = false;
 
-    public Floyed(Weighted graph) {
+    public Floyed(UndirectedWeightedGraph graph) {
         this.graph = graph;
         dis = new int[graph.getV()][graph.getV()];
         for (int v = 0; v < graph.getV(); v ++) {
@@ -57,7 +58,7 @@ public class Floyed {
     }
 
     public static void main(String[] args) {
-        Weighted g = new Weighted("g16.txt");
+        UndirectedWeightedGraph g = new Weighted("g16.txt");
         Floyed floyed = new Floyed(g);
         if (!floyed.hasNegativeCycle()) {
             for (int v = 0; v < g.getV(); v ++) {

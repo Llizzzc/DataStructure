@@ -1,15 +1,16 @@
 package graph;
 
 import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.TreeSet;
 import  java.util.Scanner;
 
-public class Weighted implements UndirectedWeightedGraph {
+public class DirectedAdjSet implements DirectedGraph {
 
-    private TreeMap<Integer, Integer>[] adj;
+    private TreeSet<Integer>[] adj;    // 邻接表, 使用TreeSet优化查找
     private int V;  // 顶点数
     private int E;  // 边数
+    private int[] inDegree;
+    private int[] outDegree;
 
     /**
      * 根据file构建邻接表.
@@ -17,7 +18,7 @@ public class Weighted implements UndirectedWeightedGraph {
      * @param filename 文件名
      * @throws IllegalArgumentException V && E need to > 0, 两个顶点间不存在多条边, 不存在自环
      */
-    public Weighted(String filename) {
+    public DirectedAdjSet(String filename) {
         File f = new File(filename);
         try (Scanner scanner = new Scanner(f)) {
             V = scanner.nextInt();
@@ -28,27 +29,45 @@ public class Weighted implements UndirectedWeightedGraph {
             if (E <= 0) {
                 throw new IllegalArgumentException("E must > 0!");
             }
-            adj = new TreeMap[V];
+            adj = new TreeSet[V];
+            inDegree = new int[V];
+            outDegree = new int[V];
+
             for (int i = 0; i < V; i ++) {
-                adj[i] = new TreeMap<>();
+                adj[i] = new TreeSet<>();
             }
             for (int i = 0; i < E; i ++) {
                 int a = scanner.nextInt();
                 validate(a);
                 int b = scanner.nextInt();
                 validate(b);
-                int weight = scanner.nextInt();
                 if (a == b) {
                     throw new IllegalArgumentException("a can not equal b!");
                 }
-                if (adj[a].containsKey(b)) {
+                if (adj[a].contains(b)) {
                     throw new IllegalArgumentException("The side already exists!");
                 }
-                adj[a].put(b, weight);
-                adj[b].put(a, weight);
+                adj[a].add(b);
+                inDegree[b] ++;
+                outDegree[a] ++;
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public DirectedAdjSet(TreeSet<Integer>[] adj) {
+        this.adj = adj;
+        this.V = adj.length;
+        this.E = 0;
+        inDegree = new int[V];
+        outDegree = new int[V];
+        for(int v = 0; v < V; v ++) {
+            for (int w : adj[v]) {
+                outDegree[v] ++;
+                inDegree[w] ++;
+                this.E ++;
+            }
         }
     }
 
@@ -66,19 +85,25 @@ public class Weighted implements UndirectedWeightedGraph {
     public boolean hasEdge(int v, int w) {
         validate(v);
         validate(w);
-        return adj[v].containsKey(w);
+        return adj[v].contains(w);
     }
 
     @Override
     public Iterable<Integer> adj(int v) {
         validate(v);
-        return adj[v].keySet();
+        return adj[v];
     }
 
     @Override
-    public int degree(int v) {
+    public int inDegree(int v) {
         validate(v);
-        return adj[v].size();
+        return inDegree[v];
+    }
+
+    @Override
+    public int outDegree(int v) {
+        validate(v);
+        return outDegree[v];
     }
 
     @Override
@@ -92,31 +117,44 @@ public class Weighted implements UndirectedWeightedGraph {
     public void removeEdge(int v, int w){
         validate(v);
         validate(w);
-        if(adj[v].containsKey(w)) {
+        if(adj[v].contains(w)) {
             E --;
+            outDegree[v] --;
+            inDegree[w] --;
         }
         adj[v].remove(w);
-        adj[w].remove(v);
     }
 
-    @Override
-    public int getWeight(int v, int w) {
-        if (hasEdge(v, w)) {
-            return adj[v].get(w);
+    public DirectedGraph reverseGraph() {
+        TreeSet<Integer>[] rAdj = new TreeSet[V];
+        for(int i = 0; i < V; i ++) {
+            rAdj[i] = new TreeSet<>();
         }
-        throw new IllegalArgumentException("No edge.");
+        for(int v = 0; v < V; v ++) {
+            for (int w : adj(v)) {
+                rAdj[w].add(v);
+            }
+        }
+        return new DirectedAdjSet(rAdj);
     }
 
     @Override
     public Object clone(){
         try{
-            Weighted cloned = (Weighted) super.clone();
-            cloned.adj = new TreeMap[V];
+            DirectedAdjSet cloned = (DirectedAdjSet) super.clone();
+            cloned.adj = new TreeSet[V];
             for(int v = 0; v < V; v ++){
-                cloned.adj[v] = new TreeMap<>();
-                for(Map.Entry<Integer, Integer> entry : adj[v].entrySet()) {
-                    cloned.adj[v].put(entry.getKey(), entry.getValue());
-                }
+                cloned.adj[v] = new TreeSet<>();
+                for(int w: adj[v])
+                    cloned.adj[v].add(w);
+            }
+            cloned.inDegree = new int[V];
+            for(int v = 0; v < V; v ++){
+                cloned.inDegree[v] = inDegree[v];
+            }
+            cloned.outDegree = new int[V];
+            for(int v = 0; v < V; v ++){
+                cloned.outDegree[v] = outDegree[v];
             }
             return cloned;
         }
@@ -132,8 +170,8 @@ public class Weighted implements UndirectedWeightedGraph {
         sb.append(String.format("顶点数: %d, 边数: %d\n", V, E));
         for (int v = 0; v < V; v ++) {
             sb.append(v).append(" : ");
-            for (Map.Entry<Integer, Integer> entry : adj[v].entrySet()) {
-                sb.append(String.format("(%d: %d)", entry.getKey(), entry.getValue())).append(" ");
+            for (int w : adj[v]) {
+                sb.append(w).append(" ");
             }
             sb.append("\n");
         }
@@ -141,7 +179,15 @@ public class Weighted implements UndirectedWeightedGraph {
     }
 
     public static void main(String[] args) {
-        Weighted weighted = new Weighted("g15.txt");
-        System.out.println(weighted);
+        DirectedAdjSet directedAdjSet = new DirectedAdjSet("dg.txt");
+        System.out.println(directedAdjSet);
+
+        for (int i = 0; i < directedAdjSet.getV(); i ++) {
+            System.out.print(directedAdjSet.inDegree(i) + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < directedAdjSet.getV(); i ++) {
+            System.out.print(directedAdjSet.outDegree(i) + " ");
+        }
     }
 }

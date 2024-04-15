@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.TreeSet;
 import  java.util.Scanner;
 
-public class AdjSet implements Graph, Cloneable{
+public class AdjSet implements UndirectedGraph {
 
     private TreeSet<Integer>[] adj;    // 邻接表, 使用TreeSet优化查找
     private int V;  // 顶点数

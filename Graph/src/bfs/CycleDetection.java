@@ -6,12 +6,12 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 
-public class CycleDetection2 {
+public class CycleDetection {
     private Graph graph;
     private int[] pre;  // 记录父节点
     private boolean hasCycle;
 
-    public CycleDetection2(Graph graph){
+    public CycleDetection(Graph graph){
         this.graph = graph;
         pre = new int[graph.getV()];
         Arrays.fill(pre, -1);
@@ -54,9 +54,9 @@ public class CycleDetection2 {
     }
 
     public static void main(String[] args){
-        CycleDetection2 cycleDetection2 = new CycleDetection2(new AdjSet("g.txt"));
-        System.out.println(cycleDetection2.hasCycle());
-        cycleDetection2 = new CycleDetection2(new AdjSet("g2.txt"));
-        System.out.println(cycleDetection2.hasCycle());
+        CycleDetection cycleDetection = new CycleDetection(new AdjSet("g.txt"));
+        System.out.println(cycleDetection.hasCycle());
+        cycleDetection = new CycleDetection(new AdjSet("g2.txt"));
+        System.out.println(cycleDetection.hasCycle());
     }
 }

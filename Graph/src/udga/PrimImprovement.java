@@ -1,13 +1,14 @@
-package mst;
+package udga;
 
 import dfs.CC;
 import graph.Weighted;
+import graph.UndirectedWeightedGraph;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class PrimImprovement {
-    private Weighted graph;
+    private UndirectedWeightedGraph graph;
     private ArrayList<Edge> mst = new ArrayList<>();
 
     public class Edge implements Comparable<Edge> {
@@ -32,7 +33,7 @@ public class PrimImprovement {
         }
     }
 
-    public PrimImprovement(Weighted graph) {
+    public PrimImprovement(UndirectedWeightedGraph graph) {
         this.graph = graph;
         CC cc = new CC(graph);
         if (cc.getCount() > 1) {

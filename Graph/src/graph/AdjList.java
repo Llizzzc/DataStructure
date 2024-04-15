@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class AdjList implements Graph {
+public class AdjList implements UndirectedGraph {
 
     private LinkedList<Integer>[] adj;    // 邻接表
     private int V;  // 顶点数

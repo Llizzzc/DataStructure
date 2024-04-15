@@ -1,18 +1,19 @@
 package sp;
 
 import graph.Weighted;
+import graph.UndirectedWeightedGraph;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class BellmanFord {
-    private Weighted graph;
+    private UndirectedWeightedGraph graph;
     private int s;
     private int[] dis;
     private int[] pre;
     private boolean hasNegCycle = false;
 
-    public BellmanFord(Weighted graph, int s) {
+    public BellmanFord(UndirectedWeightedGraph graph, int s) {
         this.graph = graph;
         graph.validate(s);
         this.s = s;
@@ -74,7 +75,7 @@ public class BellmanFord {
     }
 
     public static void main(String[] args) {
-        Weighted g = new Weighted("g16.txt");
+        UndirectedWeightedGraph g = new Weighted("g16.txt");
         BellmanFord bf = new BellmanFord(g, 0);
         if (!bf.hasNegativeCycle()){
             for (int v = 0; v < g.getV(); v ++) {

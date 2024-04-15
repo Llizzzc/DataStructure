@@ -5,11 +5,13 @@ import java.util.Map;
 import java.util.TreeMap;
 import  java.util.Scanner;
 
-public class Weighted implements UndirectedWeightedGraph {
+public class DirectedWeighted implements DirectedWeightedGraph {
 
     private TreeMap<Integer, Integer>[] adj;
     private int V;  // 顶点数
     private int E;  // 边数
+    private int[] inDegree;
+    private int[] outDegree;
 
     /**
      * 根据file构建邻接表.
@@ -17,7 +19,7 @@ public class Weighted implements UndirectedWeightedGraph {
      * @param filename 文件名
      * @throws IllegalArgumentException V && E need to > 0, 两个顶点间不存在多条边, 不存在自环
      */
-    public Weighted(String filename) {
+    public DirectedWeighted(String filename) {
         File f = new File(filename);
         try (Scanner scanner = new Scanner(f)) {
             V = scanner.nextInt();
@@ -29,6 +31,9 @@ public class Weighted implements UndirectedWeightedGraph {
                 throw new IllegalArgumentException("E must > 0!");
             }
             adj = new TreeMap[V];
+            inDegree = new int[V];
+            outDegree = new int[V];
+
             for (int i = 0; i < V; i ++) {
                 adj[i] = new TreeMap<>();
             }
@@ -45,7 +50,8 @@ public class Weighted implements UndirectedWeightedGraph {
                     throw new IllegalArgumentException("The side already exists!");
                 }
                 adj[a].put(b, weight);
-                adj[b].put(a, weight);
+                inDegree[b] ++;
+                outDegree[a] ++;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,9 +82,15 @@ public class Weighted implements UndirectedWeightedGraph {
     }
 
     @Override
-    public int degree(int v) {
+    public int inDegree(int v) {
         validate(v);
-        return adj[v].size();
+        return inDegree[v];
+    }
+
+    @Override
+    public int outDegree(int v) {
+        validate(v);
+        return outDegree[v];
     }
 
     @Override
@@ -94,9 +106,10 @@ public class Weighted implements UndirectedWeightedGraph {
         validate(w);
         if(adj[v].containsKey(w)) {
             E --;
+            outDegree[v] --;
+            inDegree[w] --;
         }
         adj[v].remove(w);
-        adj[w].remove(v);
     }
 
     @Override
@@ -110,13 +123,21 @@ public class Weighted implements UndirectedWeightedGraph {
     @Override
     public Object clone(){
         try{
-            Weighted cloned = (Weighted) super.clone();
+            DirectedWeighted cloned = (DirectedWeighted) super.clone();
             cloned.adj = new TreeMap[V];
             for(int v = 0; v < V; v ++){
                 cloned.adj[v] = new TreeMap<>();
                 for(Map.Entry<Integer, Integer> entry : adj[v].entrySet()) {
                     cloned.adj[v].put(entry.getKey(), entry.getValue());
                 }
+            }
+            cloned.inDegree = new int[V];
+            for(int v = 0; v < V; v ++){
+                cloned.inDegree[v] = inDegree[v];
+            }
+            cloned.outDegree = new int[V];
+            for(int v = 0; v < V; v ++){
+                cloned.outDegree[v] = outDegree[v];
             }
             return cloned;
         }
@@ -138,10 +159,5 @@ public class Weighted implements UndirectedWeightedGraph {
             sb.append("\n");
         }
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        Weighted weighted = new Weighted("g15.txt");
-        System.out.println(weighted);
     }
 }

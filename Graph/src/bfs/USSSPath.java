@@ -2,7 +2,6 @@ package bfs;
 
 import graph.AdjSet;
 import graph.Graph;
-
 import java.util.*;
 
 // Unweighted Single Source Shortest Path

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 
-public class BipartiteDetection2 {
+public class BipartiteDetection {
     private Graph graph;
     private int[] colors;   // -1无色, 0红色, 1绿色
     private boolean[] visited;
@@ -15,7 +15,7 @@ public class BipartiteDetection2 {
     private ArrayList<Integer> green = new ArrayList<>();
     private boolean isBipartite = true;
 
-    public BipartiteDetection2(Graph graph) {
+    public BipartiteDetection(Graph graph) {
         this.graph = graph;
         visited = new boolean[graph.getV()];
         colors = new int[graph.getV()];
@@ -78,13 +78,13 @@ public class BipartiteDetection2 {
     }
 
     public static void main(String[] args) {
-        BipartiteDetection2 bipartiteDetection2 = new BipartiteDetection2(new AdjSet("g.txt"));
-        System.out.println(bipartiteDetection2.isBipartite());
-        System.out.println("red: " + bipartiteDetection2.getRed());
-        System.out.println("green: " + bipartiteDetection2.green());
-        bipartiteDetection2 = new BipartiteDetection2(new AdjSet("g4.txt"));
-        System.out.println(bipartiteDetection2.isBipartite());
-        System.out.println("red: " + bipartiteDetection2.getRed());
-        System.out.println("green: " + bipartiteDetection2.green());
+        BipartiteDetection bipartiteDetection = new BipartiteDetection(new AdjSet("g.txt"));
+        System.out.println(bipartiteDetection.isBipartite());
+        System.out.println("red: " + bipartiteDetection.getRed());
+        System.out.println("green: " + bipartiteDetection.green());
+        bipartiteDetection = new BipartiteDetection(new AdjSet("g4.txt"));
+        System.out.println(bipartiteDetection.isBipartite());
+        System.out.println("red: " + bipartiteDetection.getRed());
+        System.out.println("green: " + bipartiteDetection.green());
     }
 }

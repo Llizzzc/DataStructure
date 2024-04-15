@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 
-public class CC2 {
+public class CC {
     private Graph graph;
     private int visited[];  // 记录访问过的节点
     private int ccCount = 0;  // 连通分量的个数
 
-    public CC2(Graph graph) {
+    public CC(Graph graph) {
         this.graph = graph;
         visited = new int[graph.getV()];
         Arrays.fill(visited, -1);
@@ -78,11 +78,11 @@ public class CC2 {
     }
 
     public static void main(String[] args) {
-        CC2 cc2 = new CC2(new AdjSet("g.txt"));
-        System.out.println(cc2.getCount());
-        System.out.println(cc2.isConnected(0, 1));
-        System.out.println(cc2.isConnected(0, 5));
-        ArrayList<Integer>[] components = cc2.components();
+        CC cc = new CC(new AdjSet("g.txt"));
+        System.out.println(cc.getCount());
+        System.out.println(cc.isConnected(0, 1));
+        System.out.println(cc.isConnected(0, 5));
+        ArrayList<Integer>[] components = cc.components();
         for (int i = 0; i < components.length; i ++) {
             System.out.print(i + " : ");
             for (int w : components[i]) {

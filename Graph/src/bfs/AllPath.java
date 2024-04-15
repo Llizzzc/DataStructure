@@ -3,16 +3,16 @@ package bfs;
 import graph.AdjSet;
 import graph.Graph;
 
-public class AllPath2 {
+public class AllPath {
 
     private Graph graph;
-    private SingleSourcePathImprovement2[] path;
+    private SingleSourcePathImprovement[] path;
 
-    public AllPath2(Graph graph) {
+    public AllPath(Graph graph) {
         this.graph = graph;
-        path = new SingleSourcePathImprovement2[graph.getV()];
+        path = new SingleSourcePathImprovement[graph.getV()];
         for (int v = 0; v < graph.getV(); v ++) {
-            path[v] = new SingleSourcePathImprovement2(graph, v);
+            path[v] = new SingleSourcePathImprovement(graph, v);
         }
     }
 
@@ -43,9 +43,9 @@ public class AllPath2 {
     }
 
     public static void main(String[] args) {
-        AllPath2 allPath2 = new AllPath2(new AdjSet("g.txt"));
-        System.out.println("0 -> 6: " + allPath2.path(0, 6));
-        System.out.println("1 -> 4: " + allPath2.path(1, 4));
-        System.out.println("3 -> 6: " + allPath2.path(3, 6));
+        AllPath allPath = new AllPath(new AdjSet("g.txt"));
+        System.out.println("0 -> 6: " + allPath.path(0, 6));
+        System.out.println("1 -> 4: " + allPath.path(1, 4));
+        System.out.println("3 -> 6: " + allPath.path(3, 6));
     }
 }

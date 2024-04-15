@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdjMatrix implements Graph {
+public class AdjMatrix implements UndirectedGraph {
 
     private int[][] adj;    // 邻接矩阵
     private int V;  // 顶点数

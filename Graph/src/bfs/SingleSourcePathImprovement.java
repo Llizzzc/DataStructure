@@ -4,12 +4,12 @@ import graph.AdjSet;
 import graph.Graph;
 import java.util.*;
 
-public class SingleSourcePathImprovement2 {
+public class SingleSourcePathImprovement {
     private Graph graph;
     private int s;
     private int[] pre;  // 记录父节点
 
-    public SingleSourcePathImprovement2(Graph graph, int s){
+    public SingleSourcePathImprovement(Graph graph, int s){
         graph.validate(s);
         this.graph = graph;
         this.s = s;
@@ -66,8 +66,8 @@ public class SingleSourcePathImprovement2 {
     }
 
     public static void main(String[] args) {
-        SingleSourcePathImprovement2 singleSourcePathImprovement2 = new SingleSourcePathImprovement2(new AdjSet("g.txt"),  0);
-        System.out.println("0 -> 6: " + singleSourcePathImprovement2.path(6));
-        System.out.println("0 -> 5: " + singleSourcePathImprovement2.path(5));
+        SingleSourcePathImprovement singleSourcePathImprovement = new SingleSourcePathImprovement(new AdjSet("g.txt"),  0);
+        System.out.println("0 -> 6: " + singleSourcePathImprovement.path(6));
+        System.out.println("0 -> 5: " + singleSourcePathImprovement.path(5));
     }
 }

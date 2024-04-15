@@ -1,32 +1,18 @@
-package dfs;
+package udga;
 
 import graph.AdjSet;
 import graph.Graph;
-import java.util.ArrayList;
+import java.util.HashSet;
 
-public class FindBridges {
+public class FindCutPoints {
     private Graph graph;
     private boolean visited[];  // 记录访问过的节点
     private int[] ord;  // 记录节点访问顺序
     private int[] low;  // 记录该节点能够到达的顺序最靠前的节点
     private int count;
-    private ArrayList<Edge> res = new ArrayList<>();
+    private HashSet<Integer> res = new HashSet<>();
 
-    public class Edge {
-        private int v;
-        private int w;
-        public Edge(int v, int w) {
-            this.v = v;
-            this.w = w;
-        }
-
-        @Override
-        public String toString() {
-            return "(" + v + " - " + w + ")";
-        }
-    }
-
-    public FindBridges(Graph graph) {
+    public FindCutPoints(Graph graph) {
         this.graph = graph;
         visited = new boolean[graph.getV()];
         ord = new int[graph.getV()];
@@ -39,7 +25,7 @@ public class FindBridges {
     }
 
     /**
-     * 寻找图中的桥(删掉这条边, 图中连通分量会发生变化).
+     * 寻找图中的割点(删掉这个顶点, 图中连通分量会发生变化).
      *
      * @param v 顶点
      */
@@ -48,31 +34,36 @@ public class FindBridges {
         ord[v] = count;
         low[v] = ord[v];
         count ++;
+        int child = 0;
         for (int w : graph.adj(v)) {
             if (!visited[w]) {
                 dfs(w, v);
                 low[v] = Math.min(low[v], low[w]);
-                if (low[w] > ord[v]) {
-                    res.add(new Edge(v, w));
+                if (v != parent && low[w] >= ord[v]) {
+                    res.add(v);
+                }
+                child ++;
+                if (v == parent && child > 1) {
+                    res.add(v);
                 }
             } else if (w != parent) {
-                low[v] = Math.min(low[v], low[w]);
+                low[v] = Math.min(low[v], ord[w]);
             }
         }
     }
 
-    public ArrayList<Edge> result() {
+    public HashSet<Integer> result() {
         return res;
     }
 
     public static void main(String[] args) {
-        FindBridges findBridges = new FindBridges(new AdjSet("g5.txt"));
+        FindCutPoints findBridges = new FindCutPoints(new AdjSet("g5.txt"));
         System.out.println(findBridges.result());
 
-        findBridges = new FindBridges(new AdjSet("g6.txt"));
+        findBridges = new FindCutPoints(new AdjSet("g6.txt"));
         System.out.println(findBridges.result());
 
-        findBridges = new FindBridges(new AdjSet("g7.txt"));
+        findBridges = new FindCutPoints(new AdjSet("g8.txt"));
         System.out.println(findBridges.result());
     }
 }

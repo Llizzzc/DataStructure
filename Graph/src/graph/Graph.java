@@ -1,6 +1,7 @@
 package graph;
 
-public interface Graph {
+public interface Graph extends Cloneable {
+
     /**
      * 获取顶点数.
      *
@@ -31,14 +32,6 @@ public interface Graph {
      * @return 返回相邻的顶点
      */
     Iterable<Integer> adj(int v);
-
-    /**
-     * 获取顶点v的度数.
-     *
-     * @param v 顶点
-     * @return 返回顶点v的度数
-     */
-    int degree(int v);
 
     /**
      * 判断顶点合法性.
