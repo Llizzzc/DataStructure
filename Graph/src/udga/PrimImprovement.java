@@ -1,7 +1,6 @@
 package udga;
 
-import dfs.CC;
-import graph.Weighted;
+import graph.UndirectedWeighted;
 import graph.UndirectedWeightedGraph;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -64,7 +63,7 @@ public class PrimImprovement {
     }
 
     public static void main(String[] args) {
-        PrimImprovement primImprovement = new PrimImprovement(new Weighted("g15.txt"));
+        PrimImprovement primImprovement = new PrimImprovement(new UndirectedWeighted("g15.txt"));
         System.out.println(primImprovement.result());
     }
 }

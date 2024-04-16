@@ -1,7 +1,6 @@
 package udga;
 
-import dfs.CC;
-import graph.Weighted;
+import graph.UndirectedWeighted;
 import graph.UndirectedWeightedGraph;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,7 +60,7 @@ public class Kruskal {
     }
 
     public static void main(String[] args) {
-        Kruskal kruskal = new Kruskal(new Weighted("g15.txt"));
+        Kruskal kruskal = new Kruskal(new UndirectedWeighted("g15.txt"));
         System.out.println(kruskal.result());
     }
 }

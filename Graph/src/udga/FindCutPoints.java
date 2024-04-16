@@ -1,18 +1,18 @@
 package udga;
 
-import graph.AdjSet;
-import graph.Graph;
+import graph.UndirectedAdjSet;
+import graph.UndirectedGraph;
 import java.util.HashSet;
 
 public class FindCutPoints {
-    private Graph graph;
+    private UndirectedGraph graph;
     private boolean visited[];  // 记录访问过的节点
     private int[] ord;  // 记录节点访问顺序
     private int[] low;  // 记录该节点能够到达的顺序最靠前的节点
     private int count;
     private HashSet<Integer> res = new HashSet<>();
 
-    public FindCutPoints(Graph graph) {
+    public FindCutPoints(UndirectedGraph graph) {
         this.graph = graph;
         visited = new boolean[graph.getV()];
         ord = new int[graph.getV()];
@@ -57,13 +57,13 @@ public class FindCutPoints {
     }
 
     public static void main(String[] args) {
-        FindCutPoints findBridges = new FindCutPoints(new AdjSet("g5.txt"));
+        FindCutPoints findBridges = new FindCutPoints(new UndirectedAdjSet("g5.txt"));
         System.out.println(findBridges.result());
 
-        findBridges = new FindCutPoints(new AdjSet("g6.txt"));
+        findBridges = new FindCutPoints(new UndirectedAdjSet("g6.txt"));
         System.out.println(findBridges.result());
 
-        findBridges = new FindCutPoints(new AdjSet("g8.txt"));
+        findBridges = new FindCutPoints(new UndirectedAdjSet("g8.txt"));
         System.out.println(findBridges.result());
     }
 }

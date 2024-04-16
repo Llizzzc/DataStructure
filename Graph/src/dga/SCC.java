@@ -1,6 +1,6 @@
 package dga;
 
-import dfs.GraphDFS;
+import common.GraphDFS;
 import graph.DirectedAdjSet;
 import java.util.ArrayList;
 import java.util.Arrays;

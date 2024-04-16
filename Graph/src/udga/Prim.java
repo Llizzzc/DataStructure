@@ -1,7 +1,6 @@
 package udga;
 
-import dfs.CC;
-import graph.Weighted;
+import graph.UndirectedWeighted;
 import graph.UndirectedWeightedGraph;
 
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public class Prim {
     }
 
     public static void main(String[] args) {
-        Prim prim = new Prim(new Weighted("g15.txt"));
+        Prim prim = new Prim(new UndirectedWeighted("g15.txt"));
         System.out.println(prim.result());
     }
 }

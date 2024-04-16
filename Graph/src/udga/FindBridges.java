@@ -1,11 +1,11 @@
 package udga;
 
-import graph.AdjSet;
-import graph.Graph;
+import graph.UndirectedAdjSet;
+import graph.UndirectedGraph;
 import java.util.ArrayList;
 
 public class FindBridges {
-    private Graph graph;
+    private UndirectedGraph graph;
     private boolean visited[];  // 记录访问过的节点
     private int[] ord;  // 记录节点访问顺序
     private int[] low;  // 记录该节点能够到达的顺序最靠前的节点
@@ -26,7 +26,7 @@ public class FindBridges {
         }
     }
 
-    public FindBridges(Graph graph) {
+    public FindBridges(UndirectedGraph graph) {
         this.graph = graph;
         visited = new boolean[graph.getV()];
         ord = new int[graph.getV()];
@@ -66,13 +66,13 @@ public class FindBridges {
     }
 
     public static void main(String[] args) {
-        FindBridges findBridges = new FindBridges(new AdjSet("g5.txt"));
+        FindBridges findBridges = new FindBridges(new UndirectedAdjSet("g5.txt"));
         System.out.println(findBridges.result());
 
-        findBridges = new FindBridges(new AdjSet("g6.txt"));
+        findBridges = new FindBridges(new UndirectedAdjSet("g6.txt"));
         System.out.println(findBridges.result());
 
-        findBridges = new FindBridges(new AdjSet("g7.txt"));
+        findBridges = new FindBridges(new UndirectedAdjSet("g7.txt"));
         System.out.println(findBridges.result());
     }
 }

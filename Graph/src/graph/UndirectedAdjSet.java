@@ -4,13 +4,11 @@ import java.io.File;
 import java.util.TreeSet;
 import  java.util.Scanner;
 
-public class DirectedAdjSet implements DirectedGraph {
+public class UndirectedAdjSet implements UndirectedGraph {
 
     private TreeSet<Integer>[] adj;    // 邻接表, 使用TreeSet优化查找
     private int V;  // 顶点数
     private int E;  // 边数
-    private int[] inDegree;
-    private int[] outDegree;
 
     /**
      * 根据file构建邻接表.
@@ -18,7 +16,7 @@ public class DirectedAdjSet implements DirectedGraph {
      * @param filename 文件名
      * @throws IllegalArgumentException V && E need to > 0, 两个顶点间不存在多条边, 不存在自环
      */
-    public DirectedAdjSet(String filename) {
+    public UndirectedAdjSet(String filename) {
         File f = new File(filename);
         try (Scanner scanner = new Scanner(f)) {
             V = scanner.nextInt();
@@ -30,9 +28,6 @@ public class DirectedAdjSet implements DirectedGraph {
                 throw new IllegalArgumentException("E must > 0!");
             }
             adj = new TreeSet[V];
-            inDegree = new int[V];
-            outDegree = new int[V];
-
             for (int i = 0; i < V; i ++) {
                 adj[i] = new TreeSet<>();
             }
@@ -48,26 +43,10 @@ public class DirectedAdjSet implements DirectedGraph {
                     throw new IllegalArgumentException("The side already exists!");
                 }
                 adj[a].add(b);
-                inDegree[b] ++;
-                outDegree[a] ++;
+                adj[b].add(a);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public DirectedAdjSet(TreeSet<Integer>[] adj) {
-        this.adj = adj;
-        this.V = adj.length;
-        this.E = 0;
-        inDegree = new int[V];
-        outDegree = new int[V];
-        for(int v = 0; v < V; v ++) {
-            for (int w : adj[v]) {
-                outDegree[v] ++;
-                inDegree[w] ++;
-                this.E ++;
-            }
         }
     }
 
@@ -95,15 +74,9 @@ public class DirectedAdjSet implements DirectedGraph {
     }
 
     @Override
-    public int inDegree(int v) {
+    public int degree(int v) {
         validate(v);
-        return inDegree[v];
-    }
-
-    @Override
-    public int outDegree(int v) {
-        validate(v);
-        return outDegree[v];
+        return adj[v].size();
     }
 
     @Override
@@ -119,42 +92,20 @@ public class DirectedAdjSet implements DirectedGraph {
         validate(w);
         if(adj[v].contains(w)) {
             E --;
-            outDegree[v] --;
-            inDegree[w] --;
         }
         adj[v].remove(w);
-    }
-
-    public DirectedGraph reverseGraph() {
-        TreeSet<Integer>[] rAdj = new TreeSet[V];
-        for(int i = 0; i < V; i ++) {
-            rAdj[i] = new TreeSet<>();
-        }
-        for(int v = 0; v < V; v ++) {
-            for (int w : adj(v)) {
-                rAdj[w].add(v);
-            }
-        }
-        return new DirectedAdjSet(rAdj);
+        adj[w].remove(v);
     }
 
     @Override
     public Object clone() {
         try{
-            DirectedAdjSet cloned = (DirectedAdjSet) super.clone();
+            UndirectedAdjSet cloned = (UndirectedAdjSet) super.clone();
             cloned.adj = new TreeSet[V];
             for(int v = 0; v < V; v ++){
                 cloned.adj[v] = new TreeSet<>();
                 for(int w: adj[v])
                     cloned.adj[v].add(w);
-            }
-            cloned.inDegree = new int[V];
-            for(int v = 0; v < V; v ++){
-                cloned.inDegree[v] = inDegree[v];
-            }
-            cloned.outDegree = new int[V];
-            for(int v = 0; v < V; v ++){
-                cloned.outDegree[v] = outDegree[v];
             }
             return cloned;
         }
@@ -179,15 +130,7 @@ public class DirectedAdjSet implements DirectedGraph {
     }
 
     public static void main(String[] args) {
-        DirectedAdjSet directedAdjSet = new DirectedAdjSet("dg.txt");
-        System.out.println(directedAdjSet);
-
-        for (int i = 0; i < directedAdjSet.getV(); i ++) {
-            System.out.print(directedAdjSet.inDegree(i) + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < directedAdjSet.getV(); i ++) {
-            System.out.print(directedAdjSet.outDegree(i) + " ");
-        }
+        UndirectedAdjSet undirectedAdjSet = new UndirectedAdjSet("g.txt");
+        System.out.println(undirectedAdjSet);
     }
 }
