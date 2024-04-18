@@ -33,7 +33,7 @@ public class MaxFlow {
                 rG.addEdge(w, v, 0);
             }
         }
-        while(true) {
+        while (true) {
             ArrayList<Integer> augPath = getAugmentingPath();
             if(augPath.size() == 0) {
                 break;

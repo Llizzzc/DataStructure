@@ -71,6 +71,10 @@ public class BipartiteDetection {
         return green;
     }
 
+    public int[] getColors() {
+        return colors;
+    }
+
     public static void main(String[] args) {
         BipartiteDetection bipartiteDetection = new BipartiteDetection(new UndirectedAdjSet("g.txt"));
         System.out.println(bipartiteDetection.isBipartite());
